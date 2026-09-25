@@ -22,6 +22,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
+  History,
 } from 'lucide-react';
 import { triggerHapticFeedback } from '@/lib/haptic';
 
@@ -41,7 +42,8 @@ export type ModuleId =
   | 'queue-tv'
   | 'whatsapp-crm'
   | 'satusehat'
-  | 'bpjs-pcare';
+  | 'bpjs-pcare'
+  | 'audit-trail';
 
 interface ModuleItem {
   id: ModuleId;
@@ -92,6 +94,7 @@ const MODULE_CATEGORIES: ModuleCategory[] = [
       { id: 'whatsapp-crm', code: 'M-08', name: 'WhatsApp CRM & Recall', icon: MessageSquare },
       { id: 'satusehat', code: 'M-07', name: 'SATUSEHAT FHIR R4 Engine', icon: Network, badge: 'Sync', badgeColor: 'bg-emerald-500 text-white' },
       { id: 'bpjs-pcare', code: 'M-16', name: 'BPJS P-Care Gigi Bridging', icon: Building },
+      { id: 'audit-trail', code: 'M-17', name: 'Audit Trail & Forensik EMR', icon: History, badge: 'PDP', badgeColor: 'bg-teal-600 text-white' },
     ],
   },
 ];

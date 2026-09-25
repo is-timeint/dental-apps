@@ -12,6 +12,9 @@ import { DentalLabView } from '@/components/modules/dental-lab-view';
 import { BmhpInventoryView } from '@/components/modules/bmhp-inventory-view';
 import { SatuSehatView } from '@/components/modules/satusehat-view';
 import { BpjsPcareView } from '@/components/modules/bpjs-pcare-view';
+import { EnterpriseFinancialView } from '@/components/modules/enterprise-financial-view';
+import { PrescriptionView } from '@/components/modules/prescription-view';
+import { AuditTrailView } from '@/components/modules/audit-trail-view';
 import { Intraoral3DViewer } from '@/components/clinical/intraoral-3d-viewer';
 import { XrayDicomViewer } from '@/components/clinical/xray-dicom-viewer';
 import { StandardSlidingTabs, TabItem } from '@/components/ui/sliding-tabs';
@@ -44,12 +47,14 @@ import { triggerHapticFeedback } from '@/lib/haptic';
 // Tab items definition for StandardSlidingTabs with magnetic activeTabPill
 const CLINICAL_TABS: TabItem[] = [
   { id: 'odontogram', label: 'Odontogram 2.0 (EMR)' },
-  { id: 'live-floor', label: 'Live Floor & Unit Gigi', badgeCount: 3 },
-  { id: 'periodontal', label: 'Periodontal Charting' },
+  { id: 'live-floor', label: 'Live Floor & Kursi', badgeCount: 3 },
+  { id: 'prescription', label: 'e-Prescription (KFA)' },
+  { id: 'billing-pos', label: 'Kasir & Finansial Enterprise' },
+  { id: 'audit-trail', label: 'Audit Trail Medis (UU PDP)' },
   { id: 'dental-lab', label: 'Dental Lab Hub & SPK', badgeCount: 2 },
-  { id: 'queue-triage', label: 'Antrean & Triage Medis', badgeCount: 3 },
-  { id: 'billing-pos', label: 'Kasir & Billing POS' },
   { id: 'bmhp-inventory', label: 'Smart BMHP & Stok' },
+  { id: 'periodontal', label: 'Periodontal Charting' },
+  { id: 'queue-triage', label: 'Antrean & Triage Medis', badgeCount: 3 },
   { id: 'satusehat-bpjs', label: 'SATUSEHAT & BPJS P-Care' },
 ];
 
@@ -99,30 +104,35 @@ export default function Home() {
       case 'live-floor':
         setActiveTabIdx(1);
         break;
-      case 'periodontal':
+      case 'prescription':
         setActiveTabIdx(2);
-        break;
-      case 'dental-lab':
-        setActiveTabIdx(3);
-        break;
-      case 'safety-triage':
-      case 'queue-tv':
-        setActiveTabIdx(4);
         break;
       case 'billing-pos':
       case 'cashier-reconciliation':
       case 'insurance-tpa':
+        setActiveTabIdx(3);
+        break;
+      case 'audit-trail':
+        setActiveTabIdx(4);
+        break;
+      case 'dental-lab':
         setActiveTabIdx(5);
         break;
       case 'bmhp-inventory':
       case 'logistics':
         setActiveTabIdx(6);
         break;
+      case 'periodontal':
+        setActiveTabIdx(7);
+        break;
+      case 'safety-triage':
+      case 'queue-tv':
+        setActiveTabIdx(8);
+        break;
       case 'satusehat':
       case 'bpjs-pcare':
-      case 'prescription':
       case 'whatsapp-crm':
-        setActiveTabIdx(7);
+        setActiveTabIdx(9);
         break;
       default:
         setActiveTabIdx(0);
@@ -135,11 +145,13 @@ export default function Home() {
     const tabId = CLINICAL_TABS[idx].id;
     if (tabId === 'odontogram') setActiveSidebarModule('odontogram');
     else if (tabId === 'live-floor') setActiveSidebarModule('live-floor');
-    else if (tabId === 'periodontal') setActiveSidebarModule('periodontal');
-    else if (tabId === 'dental-lab') setActiveSidebarModule('dental-lab');
-    else if (tabId === 'queue-triage') setActiveSidebarModule('queue-tv');
+    else if (tabId === 'prescription') setActiveSidebarModule('prescription');
     else if (tabId === 'billing-pos') setActiveSidebarModule('billing-pos');
+    else if (tabId === 'audit-trail') setActiveSidebarModule('audit-trail');
+    else if (tabId === 'dental-lab') setActiveSidebarModule('dental-lab');
     else if (tabId === 'bmhp-inventory') setActiveSidebarModule('bmhp-inventory');
+    else if (tabId === 'periodontal') setActiveSidebarModule('periodontal');
+    else if (tabId === 'queue-triage') setActiveSidebarModule('queue-tv');
     else if (tabId === 'satusehat-bpjs') setActiveSidebarModule('satusehat');
   };
 
@@ -368,8 +380,33 @@ export default function Home() {
                 );
               }
 
-              // Tab 2: Periodontal Charting
+              // Tab 2: e-Prescription & Kamus Farmasi KFA (Modul 11)
               if (activeIndex === 2) {
+                return <PrescriptionView />;
+              }
+
+              // Tab 3: Kasir & Finansial Enterprise (Modul 05, 10, 15)
+              if (activeIndex === 3) {
+                return <EnterpriseFinancialView />;
+              }
+
+              // Tab 4: Audit Trail Medis (Modul 17 • Permenkes 24/2022 & UU PDP)
+              if (activeIndex === 4) {
+                return <AuditTrailView />;
+              }
+
+              // Tab 5: Dental Lab Hub & SPK (Modul 03)
+              if (activeIndex === 5) {
+                return <DentalLabView />;
+              }
+
+              // Tab 6: Smart BMHP & Inventaris (Modul 04)
+              if (activeIndex === 6) {
+                return <BmhpInventoryView />;
+              }
+
+              // Tab 7: Periodontal Charting (Modul 12)
+              if (activeIndex === 7) {
                 return (
                   <div className="flex flex-col gap-5">
                     <div>
@@ -386,13 +423,8 @@ export default function Home() {
                 );
               }
 
-              // Tab 3: Dental Lab Hub & SPK
-              if (activeIndex === 3) {
-                return <DentalLabView />;
-              }
-
-              // Tab 4: Queue & Triage Interlock
-              if (activeIndex === 4) {
+              // Tab 8: Queue & Triage Interlock (Modul 13 & 14)
+              if (activeIndex === 8) {
                 return (
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-wrap items-center justify-between gap-3">
@@ -433,97 +465,8 @@ export default function Home() {
                 );
               }
 
-              // Tab 5: Billing POS & Kasir
-              if (activeIndex === 5) {
-                return (
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div>
-                        <h2 className="text-lg font-black text-text-primary">
-                          Kasir, Billing POS & Rekonsiliasi Shift (Modul 05, 10, 15)
-                        </h2>
-                        <p className="text-xs text-text-secondary">
-                          Multi-payment split (QRIS, Kartu Debit, Asuransi TPA) dan Blind Drop Cash Drawer shift kasir.
-                        </p>
-                      </div>
-
-                      <Button
-                        size="sm"
-                        className="bg-brand-primary hover:bg-brand-hover text-white rounded-xl text-xs font-bold gap-1.5 shadow-xs h-9"
-                        onClick={() => {
-                          triggerHapticFeedback('light');
-                          toast.success('Menutup shift kasir & mencetak Blind Drop Report.');
-                        }}
-                      >
-                        <Receipt className="w-4 h-4" />
-                        Tutup Shift Kasir (Blind Drop)
-                      </Button>
-                    </div>
-
-                    {/* Summary Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <Card className="rounded-3xl border-border-subtle bg-surface-card shadow-xs">
-                        <CardContent className="p-4 flex items-center justify-between">
-                          <div>
-                            <span className="text-[11px] font-bold uppercase text-text-muted">
-                              Total QRIS Masuk
-                            </span>
-                            <p className="text-lg font-black font-mono text-teal-700 dark:text-teal-300 mt-1">
-                              Rp 14.850.000
-                            </p>
-                            <span className="text-[10px] text-text-muted">7 Transaksi Sukses</span>
-                          </div>
-                          <div className="w-10 h-10 rounded-2xl bg-teal-500/10 flex items-center justify-center text-brand-primary">
-                            <QrCode className="w-5 h-5" />
-                          </div>
-                        </CardContent>
-                      </Card>
-
-                      <Card className="rounded-3xl border-border-subtle bg-surface-card shadow-xs">
-                        <CardContent className="p-4 flex items-center justify-between">
-                          <div>
-                            <span className="text-[11px] font-bold uppercase text-text-muted">
-                              Debit & Kartu Kredit
-                            </span>
-                            <p className="text-lg font-black font-mono text-text-primary mt-1">
-                              Rp 9.600.000
-                            </p>
-                            <span className="text-[10px] text-text-muted">4 Transaksi EDC</span>
-                          </div>
-                          <div className="w-10 h-10 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600">
-                            <CreditCard className="w-5 h-5" />
-                          </div>
-                        </CardContent>
-                      </Card>
-
-                      <Card className="rounded-3xl border-border-subtle bg-surface-card shadow-xs">
-                        <CardContent className="p-4 flex items-center justify-between">
-                          <div>
-                            <span className="text-[11px] font-bold uppercase text-text-muted">
-                              Klaim TPA / Asuransi
-                            </span>
-                            <p className="text-lg font-black font-mono text-text-primary mt-1">
-                              Rp 4.000.000
-                            </p>
-                            <span className="text-[10px] text-text-muted">3 Berkas Pre-Auth</span>
-                          </div>
-                          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600">
-                            <Wallet className="w-5 h-5" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </div>
-                );
-              }
-
-              // Tab 6: Smart BMHP & Inventaris
-              if (activeIndex === 6) {
-                return <BmhpInventoryView />;
-              }
-
-              // Tab 7: SATUSEHAT & BPJS P-Care
-              if (activeIndex === 7) {
+              // Tab 9: SATUSEHAT & BPJS P-Care (Modul 07 & 16)
+              if (activeIndex === 9) {
                 return (
                   <div className="flex flex-col gap-8">
                     <SatuSehatView />

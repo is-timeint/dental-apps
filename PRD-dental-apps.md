@@ -181,12 +181,27 @@ input, textarea {
 * **Variance Tolerance Setting:** Konfigurasi batas penyusutan wajar bulanan (5–10%) untuk bahan pasta/cairan pada audit stok opname.
 * **Log Sterilisasi Autoklaf:** Pencatatan nomor batch mesin sterilisasi dan penempelan barcode pada kantong instrumen medis steril (*pouch*).
 
-### 5.5 Modul 5: Billing, POS & Commission Engine
-* **Split Billing:** Pemisahan otomatis pos penerimaan: Jasa Tindakan, Biaya Lab, dan Biaya Obat Farmasi.
-* **Paket DP & Deposit:** Penampungan deposit dana untuk tindakan besar (behel, implan) yang otomatis terpotong bertahap pada kunjungan berikutnya.
-* **Kalkulasi Honor Dokter Otomatis:** Perhitungan jasa medis sesuai formula resmi:
-  $$\text{Honor Bersih Dokter} = (\text{Tarif Tindakan} - \text{Biaya Dental Lab} - \text{Bahan Khusus}) \times \text{Persentase Komisi}$$
-* **Dasbor Honor Mandiri:** Akses transparan bagi dokter untuk memantau akumulasi komisi harian/mingguan mereka.
+### 5.5 Modul 5: Enterprise Billing POS, Multi-Bucket Split & Commission Engine
+* **Multi-Bucket Split Billing:** Pemisahan otomatis pos pendapatan ke dalam 5 akun buku besar (General Ledger):
+  1. *Jasa Medis Tindakan Dokter* (Professional Fee).
+  2. *Biaya Dental Lab Passthrough* (Crown, Aligner, Denture).
+  3. *Konsumsi BMHP Khusus* (Implan, Bone Graft, Membran).
+  4. *Farmasi & Resep Obat* (Antibiotik, Analgesik, Antiseptik).
+  5. *Biaya Sarana & Administrasi Faskes* (Clinic Facility Fee).
+* **Multi-Tender Payment Architecture:** Kemampuan membagi pembayaran tunggal ke beberapa instrumen sekaligus dalam 1 faktur:
+  * *QRIS Dinamis:* Pembuatan QRIS realtime dengan nominal tepat (zero human-error) dan webhook auto-settlement.
+  * *Mesin EDC Ganda:* Pencatatan Batch Number dan Approval Code untuk Debit & Kartu Kredit (BCA/Mandiri/BRI).
+  * *Asuransi / TPA Co-Payment & Excess:* Integrasi pemisahan tanggungan asuransi korporat vs pembayaran ekses pasien seketika.
+  * *Deposit Escrow Multi-Visit:* Penampungan dana muka (DP) tindakan ortodonsi/implan yang terkunci aman dan didebet proporsional per tahapan kunjungan.
+* **Automated Doctor Commission & PPh 21 Calculation:**
+  $$\text{Dasar Pengenaan Jasa} = \text{Tarif Tindakan} - \text{Biaya Dental Lab} - \text{Bahan Khusus}$$
+  $$\text{Honor Bruto Dokter} = \text{Dasar Pengenaan Jasa} \times \text{Persentase Kontrak Komisi (e.g. 40--50\%)}$$
+  $$\text{PPh 21 Dokter Gigi (Bukan Pegawai)} = 50\% \times \text{Honor Bruto} \times \text{Tarif Efektif Progresif (PPh 21 Tenaga Ahli)}$$
+  $$\text{Honor Bersih Take-Home Pay} = \text{Honor Bruto} - \text{PPh 21}$$
+* **Unit Economics & Margin Analisis per Tindakan (P&L Chair-Side):**
+  * Dasbor visual menampilkan *Gross Margin Klinik* per elemen tindakan medis secara transparan:
+    $$\text{Margin Bersih Klinik} = \text{Tarif Pasien} - (\text{Honor Dokter} + \text{Biaya Lab} + \text{Depresiasi BMHP BOM})$$
+* **Faktur Pajak & Kwitansi Resmi Elektronik:** Penomoran faktur standar mediko-legal, QR verification hash anti-pemalsuan, dan opsi kirim invoice PDF resmi via WhatsApp pasien.
 
 ### 5.6 Modul 6: Local Edge Agent (Auto X-Ray Ingestion)
 * **Folder Watcher:** Daemon latar belakang (Go/Rust) memantau folder ekspor lokal hasil tangkapan software radiologi (Vatech, Carestream, Dexis, Sirona).
@@ -214,7 +229,7 @@ input, textarea {
 * **Pembuatan Resep Elektronik:** Dokter meresepkan obat langsung dari ruang periksa (antibiotik, analgesik, anti-inflamasi, obat kumur klorheksidin).
 * **Master Obat Terstandar KFA:** Database obat terpetakan ke kode 9-digit Kamus Farmasi dan Alat Kesehatan (KFA) Kemenkes untuk bridging SATUSEHAT.
 * **Drug Interaction & Allergy Alerts:** Peringatan otomatis seketika jika dokter meresepkan obat yang memicu reaksi silang terhadap riwayat alergi pasien (misal alergi penisilin terhadap amoxicillin).
-* **Pencetakan Etiket Obat Ber-QR Code:** Pembuatan label etiket aturan pakai obat secara otomatis untuk ditempel pada klip obat farmasi klinik.
+* **Alur Dispensing & Verifikasi 7 Benar:** Antarmuka farmasi untuk telaah resep, konfirmasi peracikan (*Dispensed*), dan pencetakan etiket aturan pakai obat ber-QR Code.
 
 ### 5.12 Modul 12: Periodontal Charting & Oral Hygiene Index (Pemeriksaan Gusi)
 * **6-Point Probing Depth (PPD) per Gigi:** Pencatatan kedalaman saku gusi pada 6 titik per elemen gigi: Mesio-buccal, Mid-buccal, Disto-buccal, Mesio-lingual, Mid-lingual, Disto-lingual.
@@ -236,15 +251,30 @@ input, textarea {
   * **Trimester Pertama Kehamilan:** Peringatan otomatis pembatasan paparan sinar-X radiologi dan larangan obat kategori teratogenik.
   * **Alat Pacu Jantung (Cardiac Pacemaker):** Peringatan keras larangan penggunaan *ultrasonic scaler* magnetostriktif di dekat pasien.
 
-### 5.15 Modul 15: Rekonsiliasi Kasir, Shift Management & Refund Workflow
-* **Buka-Tutup Shift Kasir (Cash Drawer):** Pencatatan saldo kas awal (*opening float*), rekonsiliasi total transaksi fisik vs catatan sistem saat pergantian shift kasir.
-* **Pencatatan Selisih Kas (Cash Variance Audit):** Pelaporan otomatis jika terjadi selisih lebih (*overage*) atau selisih kurang (*shortage*) uang tunai di kasir.
-* **Otorisasi Pengembalian Dana (Refund & Pembatalan Deposit):** Alur refund dana DP/deposit perawatan yang dibatalkan wajib melalui otorisasi *two-factor approval* oleh *Clinic Owner / Supervisor* untuk mencegah fraud kasir.
+### 5.15 Modul 15: Enterprise Rekonsiliasi Kasir, Blind Drop Shift & Anti-Fraud
+* **Buka-Tutup Shift Kasir (Cash Drawer Management):** Pencatatan saldo kas kecil awal (*opening float*), riwayat serah-terima laci kas antar-kasir (Shift Pagi $\rightarrow$ Shift Sore).
+* **Blind Drop Cash Reconciliation (Anti-Collusion):** Kasir wajib menghitung dan memasukkan uang fisik secara buta tanpa melihat angka total sistem terlebih dahulu. Sistem kemudian membandingkan dan mendeteksi:
+  * *Variance Nol (Seimbang / Balanced).*
+  * *Shortage (Selisih Kurang - Wajib Berita Acara Kasir).*
+  * *Overage (Selisih Lebih).*
+* **Otorisasi Void & Refund 2-Factor Approval:** Setiap pembatalan invoice atau refund dana DP pasien wajib memasukkan PIN otorisasi Supervisor / Clinic Owner dengan pencatatan alasan pembatalan ke immutable audit log.
+* **Slip Setoran Bank (Cash Drop Bagging):** Pembuatan dokumen setoran uang tunai harian ke rekening operasional klinik dengan kode barcode kantong setoran (*tamper-evident cash bag*).
 
 ### 5.16 Modul 16: Bridging BPJS Kesehatan P-Care Gigi (Add-On Extension)
 * **Validasi Peserta BPJS:** Pengecekan status keaktifan kepesertaan BPJS pasien menggunakan NIK/Nomor BPJS secara instan.
 * **Pendaftaran Kunjungan P-Care:** Bridging pendaftaran faskes tingkat pertama (FKTP) langsung ke server BPJS Kesehatan.
 * **Entri Tindakan Kapitasi & Non-Kapitasi:** Sinkronisasi kode diagnosa ICD-10 dan tindakan gigi (pencabutan gigi sulung, tumpatan GIC, scaling berkala) tanpa perlu input ganda (*double entry*) di aplikasi P-Care manual.
+
+### 5.17 Modul 17: Medico-Legal Audit Trail & Forensik Akses Data (Permenkes 24/2022 & UU PDP)
+* **Antarmuka Forensik Khusus (Audit Trail Viewer):** Dasbor investigasi mediko-legal terpadu untuk `ROLE_ADMIN` dan Komite Etik/Hukum Klinik.
+* **Taksonomi Peristiwa Lengkap:**
+  * `READ_EMR`: Pelacakan siapa saja staf yang membuka rekam medis pasien (termasuk deteksi unauthorized snooping pada profil pasien VIP/selebritas).
+  * `UPDATE_ODONTOGRAM`: Pencatatan perubahan kondisi elemen gigi dengan visualisasi diff field (*sebelum vs sesudah*).
+  * `PRESCRIBE_MEDICATION`: Riwayat peresepan dan pengubahan dosis obat.
+  * `VOID_REFUND_INVOICE`: Riwayat pembatalan transaksi kasir beserta nama supervisor yang mengotorisasi.
+  * `EXPORT_DATA`: Log setiap pencetakan fisik atau ekspor PDF/Excel rekam medis ke media eksternal.
+* **Perekaman Konteks Forensik Lengkap:** Setiap log menyimpan timestamp UTC akurat, ID Klinik, User ID, Nama Staf, Peran RBAC, Alamat IP V4/V6, User-Agent browser, serta ringkasan perubahan JSON (`old_values` vs `new_values`).
+* **Integritas Tak Terhapuskan (Immutable Append-Only):** Dilarang menyediakan fungsi edit atau hapus (*DELETE/UPDATE*) pada tabel audit log, dilindungi oleh database trigger PostgreSQL.
 
 ---
 
