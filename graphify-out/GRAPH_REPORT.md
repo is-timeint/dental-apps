@@ -1,16 +1,16 @@
 # Graph Report - Dental-Apps  (2026-09-25)
 
 ## Corpus Check
-- 73 files · ~36,528 words
+- 73 files · ~38,098 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 542 nodes · 733 edges · 51 communities (43 shown, 8 thin omitted)
+- 548 nodes · 745 edges · 52 communities (44 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2e8858b1`
+- Built from commit: `8d2d8b70`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,6 +54,7 @@
 - next.config.ts
 - postcss.config.mjs
 - 20260925_init_dental_schema.sql
+- intraoral-3d-viewer.tsx
 - Rule: Prevent Generic AI Look & Enforce Humanized Design
 - bullmq.ts
 - presigned-url.ts
@@ -75,17 +76,17 @@
   src/components/ui/drawer.tsx → package.json
 - `useDrawer()` --references--> `react`  [EXTRACTED]
   src/components/ui/drawer.tsx → package.json
+- `Intraoral3DViewer()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
+  src/components/clinical/intraoral-3d-viewer.tsx → src/lib/haptic.ts
 - `ToolItem` --references--> `ToothCondition`  [EXTRACTED]
   src/components/clinical/odontogram-grid.tsx → src/types/dental.ts
-- `QueueCardProps` --references--> `QueueItem`  [EXTRACTED]
-  src/components/clinical/queue-card.tsx → src/types/dental.ts
-- `Home()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
-  src/app/page.tsx → src/lib/haptic.ts
+- `OdontogramTooth()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
+  src/components/clinical/odontogram-tooth.tsx → src/lib/haptic.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (51 total, 8 thin omitted)
+## Communities (52 total, 8 thin omitted)
 
 ### Community 0 - "UI/UX, Motion Physics & Micro-Interaction Standards"
 Cohesion: 0.08
@@ -112,8 +113,8 @@ Cohesion: 0.10
 Nodes (19): 1.1 OWASP API Security Top 10 + Standar Klinis, 1.2 Multi-Tenancy & Clinical Data Isolation, 1.3 Keamanan Berkas Medis (Rontgen, Foto Intraoral, DICOM), 1.4 Perlindungan PHI / PII & Kebijakan Zero-Logging, 1.5 Next.js App Router & Server Actions Hardening, 1.6 Rate Limiting, Brute Force & Anti-Scraping, 1.7 Concurrency Control & Database Locking (Race Condition Prevention), 1.8 Immutable Medico-Legal Audit Trail (+11 more)
 
 ### Community 6 - "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)"
-Cohesion: 0.10
-Nodes (46): CLINICAL_TABS, Home(), ChairStatusGrid(), DentalShade, Intraoral3DViewer(), MANDIBULAR_TEETH, SHADE_CONFIG, ViewMode (+38 more)
+Cohesion: 0.09
+Nodes (46): CLINICAL_TABS, Home(), ChairStatusGrid(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), PeriodontalPreview(), QueueCard() (+38 more)
 
 ### Community 7 - "5. Standar Modal, Dialog, dan Bottom Sheet"
 Cohesion: 0.07
@@ -132,8 +133,8 @@ Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 14 - "useDentalStore.ts"
-Cohesion: 0.12
-Nodes (25): ToolItem, CONDITION_FILLS, FDI_ANATOMICAL_NAMES, OdontogramToothProps, QueueCardProps, DAMPED_SPRINGS, MOTION_CONSTANTS, tabSlideVariants (+17 more)
+Cohesion: 0.13
+Nodes (20): ToolItem, CONDITION_FILLS, FDI_ANATOMICAL_NAMES, OdontogramTooth(), OdontogramToothProps, QueueCardProps, MOTION_CONSTANTS, tabSlideVariants (+12 more)
 
 ### Community 15 - "drawer.tsx"
 Cohesion: 0.13
@@ -215,6 +216,10 @@ Nodes (6): 1. Prevent Generic AI Look & Enforce Humanized Design (MANDATORY), 2.
 Cohesion: 0.61
 Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, encounters, invoices, odontogram_surfaces (+3 more)
 
+### Community 48 - "intraoral-3d-viewer.tsx"
+Cohesion: 0.26
+Nodes (11): createAnatomicalCanineGeometry(), createAnatomicalGingivalBase(), createAnatomicalIncisorGeometry(), createAnatomicalMolarGeometry(), createAnatomicalPremolarGeometry(), createCrownPreparationGeometry(), DentalShade, Intraoral3DViewer() (+3 more)
+
 ### Community 49 - "Rule: Prevent Generic AI Look & Enforce Humanized Design"
 Cohesion: 0.33
 Nodes (5): 1. Prinsip Canvas & Tata Letak Ruang Nyata, 2. Tipografi & Konten Medis Manusiawi, 3. Disiplin Warna & Karantina Medis, 4. Kehangatan Humanis & Ergonomi Pengguna, Rule: Prevent Generic AI Look & Enforce Humanized Design
@@ -234,7 +239,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `dependencies` connect `dependencies` to `1. Executive Summary & Problem Statements`, `drawer.tsx`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Why does `react` connect `drawer.tsx` to `dependencies`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
   _269 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI/UX, Motion Physics & Micro-Interaction Standards` be split into smaller, more focused modules?**

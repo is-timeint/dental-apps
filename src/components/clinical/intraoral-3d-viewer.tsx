@@ -14,8 +14,6 @@ import {
   Camera,
   RotateCcw,
   Sparkles,
-  Eye,
-  Maximize2,
   ZoomIn,
   CheckCircle2,
 } from 'lucide-react';
@@ -27,28 +25,353 @@ type ViewMode = 'ENAMEL' | 'MARGIN' | 'HEATMAP';
 
 const SHADE_CONFIG: Record<DentalShade, { color: number; roughness: number }> = {
   BLEACH: { color: 0xffffff, roughness: 0.12 },
-  A1: { color: 0xf7f5ee, roughness: 0.16 },
-  A2: { color: 0xede7d6, roughness: 0.19 },
+  A1: { color: 0xf7f5ee, roughness: 0.15 },
+  A2: { color: 0xede7d6, roughness: 0.18 },
   A3: { color: 0xe0d2b6, roughness: 0.22 },
 };
 
-// FDI Tooth Data for the 14 mandibular teeth
+// 14 Mandibular Teeth Data (FDI Notation)
 const MANDIBULAR_TEETH = [
   { fdi: '37', name: 'Molar 2 Kiri', type: 'molar', isPrep: false },
   { fdi: '36', name: 'Molar 1 Kiri', type: 'molar', isPrep: false },
   { fdi: '35', name: 'Premolar 2 Kiri', type: 'premolar', isPrep: false },
   { fdi: '34', name: 'Premolar 1 Kiri', type: 'premolar', isPrep: false },
   { fdi: '33', name: 'Kaninus Kiri', type: 'canine', isPrep: false },
-  { fdi: '32', name: 'Insisisus Lateral Kiri', type: 'incisor', isPrep: false },
-  { fdi: '31', name: 'Insisisus Sentral Kiri', type: 'incisor', isPrep: false },
-  { fdi: '41', name: 'Insisisus Sentral Kanan', type: 'incisor', isPrep: false },
-  { fdi: '42', name: 'Insisisus Lateral Kanan', type: 'incisor', isPrep: false },
+  { fdi: '32', name: 'Insisisus Lateral Kiri', type: 'incisor_lateral', isPrep: false },
+  { fdi: '31', name: 'Insisisus Sentral Kiri', type: 'incisor_central', isPrep: false },
+  { fdi: '41', name: 'Insisisus Sentral Kanan', type: 'incisor_central', isPrep: false },
+  { fdi: '42', name: 'Insisisus Lateral Kanan', type: 'incisor_lateral', isPrep: false },
   { fdi: '43', name: 'Kaninus Kanan', type: 'canine', isPrep: false },
   { fdi: '44', name: 'Premolar 1 Kanan', type: 'premolar', isPrep: false },
   { fdi: '45', name: 'Premolar 2 Kanan', type: 'premolar', isPrep: false },
-  { fdi: '46', name: 'Molar 1 Kanan (Abutment Crown)', type: 'molar', isPrep: true },
+  { fdi: '46', name: 'Molar 1 Kanan (Abutment Prep Crown)', type: 'molar', isPrep: true },
   { fdi: '47', name: 'Molar 2 Kanan', type: 'molar', isPrep: false },
 ];
+
+// ========================================================
+// Realistic Organic Anatomical Dental Geometry Generators
+// ========================================================
+
+/**
+ * 1. Anatomical Mandibular Molar (36, 37, 47)
+ * Built with full 3D subdivided grid (24x16x24).
+ * Sculpted with 4 anatomical cusps (MB, ML, DB, DL), deep central fossa pit,
+ * and developmental grooves (fissures), rounded proximal corners, and cervical constriction.
+ */
+function createAnatomicalMolarGeometry(): THREE.BufferGeometry {
+  const geom = new THREE.BoxGeometry(2.6, 2.2, 2.7, 24, 16, 24);
+  const pos = geom.attributes.position;
+
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i);
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
+
+    // Natural corner rounding into rounded trapezoid/rhomboid crown outline
+    const cornerFactor = 1.0 - (Math.abs(x) * Math.abs(z)) * 0.12;
+    x *= cornerFactor;
+    z *= cornerFactor;
+
+    // Occlusal Surface Sculpting (Top surface y > 0.4)
+    if (y > 0.4) {
+      // 4 Cusps heights using 2D Gaussian mounds:
+      // MB (Mesiobuccal: x > 0, z > 0), ML (Mesiolingual: x > 0, z < 0)
+      // DB (Distobuccal: x < 0, z > 0), DL (Distolingual: x < 0, z < 0)
+      const cuspMB = Math.exp(-((x - 0.65) ** 2 + (z - 0.65) ** 2) / 0.42) * 0.45;
+      const cuspML = Math.exp(-((x - 0.65) ** 2 + (z + 0.65) ** 2) / 0.42) * 0.52; // ML cusp is highest in lower molars
+      const cuspDB = Math.exp(-((x + 0.65) ** 2 + (z - 0.65) ** 2) / 0.42) * 0.42;
+      const cuspDL = Math.exp(-((x + 0.65) ** 2 + (z + 0.65) ** 2) / 0.42) * 0.48;
+
+      // Central Fossa Depression Pit
+      const centralPit = Math.exp(-(x * x + z * z) / 0.52) * 0.48;
+
+      // Developmental Grooves (Central fissure along X=0, Buccal/Lingual fissures along Z=0)
+      const fissureX = Math.exp(-(z * z) / 0.07) * 0.14 * Math.exp(-(x * x) / 1.1);
+      const fissureZ = Math.exp(-(x * x) / 0.07) * 0.14 * Math.exp(-(z * z) / 1.1);
+
+      y += cuspMB + cuspML + cuspDB + cuspDL - centralPit - fissureX - fissureZ;
+    }
+
+    // Buccal cervical height of contour (cervical third convexity)
+    if (z > 0 && y < 0.2 && y > -0.6) {
+      z += 0.18 * Math.sin(((y + 0.6) / 0.8) * Math.PI);
+    }
+
+    // Cervical Constriction at CEJ (neck of the tooth)
+    if (y < 0) {
+      const taper = 1.0 - (-y / 1.1) * 0.26;
+      x *= taper;
+      z *= taper;
+    }
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
+ * 2. Anatomical Mandibular Premolar (34, 35, 44, 45)
+ * Bicuspid crown: sharp elevated buccal cusp, rounded lingual cusp,
+ * central developmental groove, and raised mesial/distal marginal ridges.
+ */
+function createAnatomicalPremolarGeometry(): THREE.BufferGeometry {
+  const geom = new THREE.BoxGeometry(2.1, 2.2, 2.3, 22, 16, 22);
+  const pos = geom.attributes.position;
+
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i);
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
+
+    // Ovoid cross-section rounding
+    const cornerFactor = 1.0 - (Math.abs(x) * Math.abs(z)) * 0.15;
+    x *= cornerFactor;
+    z *= cornerFactor;
+
+    // Occlusal Bicuspid Table (y > 0.4)
+    if (y > 0.4) {
+      // Buccal Cusp (+Z): elevated, prominent, and sharp
+      const buccalCusp = Math.exp(-((z - 0.58) ** 2) / 0.35) * 0.46 * Math.exp(-(x * x) / 0.9);
+      // Lingual Cusp (-Z): rounded, slightly lower
+      const lingualCusp = Math.exp(-((z + 0.58) ** 2) / 0.35) * 0.34 * Math.exp(-(x * x) / 0.9);
+      // Central Developmental Fissure (depression between the two cusps)
+      const centralFissure = Math.exp(-(z * z) / 0.08) * 0.32;
+      // Marginal Ridges on mesial and distal borders
+      const marginalRidges = Math.abs(x) > 0.65 ? (Math.abs(x) - 0.65) * 0.28 : 0;
+
+      y += buccalCusp + lingualCusp - centralFissure + marginalRidges;
+    }
+
+    // Buccal convexity
+    if (z > 0 && y < 0.2 && y > -0.5) {
+      z += 0.14 * Math.sin(((y + 0.5) / 0.7) * Math.PI);
+    }
+
+    // Cervical CEJ Constriction
+    if (y < 0) {
+      const taper = 1.0 - (-y / 1.1) * 0.25;
+      x *= taper;
+      z *= taper;
+    }
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
+ * 3. Anatomical Canine (33, 43)
+ * Pentagonal facial outline, sharp cusp tip, central labial ridge,
+ * and convex lingual cingulum. NOT a cone!
+ */
+function createAnatomicalCanineGeometry(): THREE.BufferGeometry {
+  const geom = new THREE.BoxGeometry(1.85, 2.7, 1.95, 20, 20, 20);
+  const pos = geom.attributes.position;
+
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i);
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
+
+    const ny = y / 1.35; // -1 to +1
+
+    // Crown tapers into a pointed pentagonal cusp apex at top
+    if (ny > 0.2) {
+      const taper = 1.0 - ((ny - 0.2) / 0.8) * 0.65;
+      x *= taper;
+      z *= taper;
+
+      // Elevated pointed cusp tip
+      if (ny > 0.65) {
+        y += 0.35 * Math.exp(-(x * x + z * z) / 0.3);
+      }
+    }
+
+    // Prominent Labial Ridge (+Z) running down center of facial surface
+    if (z > 0 && Math.abs(x) < 0.45) {
+      z += 0.16 * (1.0 - Math.abs(x) / 0.45);
+    }
+
+    // Lingual Cingulum Bulge (-Z) in cervical third
+    if (z < 0 && ny < -0.15) {
+      z -= 0.2 * Math.sin(((ny + 0.6) / 0.45) * Math.PI);
+    }
+
+    // Cervical CEJ Constriction
+    if (ny < -0.3) {
+      const taper = 1.0 - ((-0.3 - ny) / 0.7) * 0.25;
+      x *= taper;
+      z *= taper;
+    }
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
+ * 4. Anatomical Incisor (31, 32, 41, 42)
+ * Spatulate chisel-shaped crown with thin incisal edge, curved convex labial face,
+ * smooth concave lingual fossa, and bulbous cervical cingulum.
+ */
+function createAnatomicalIncisorGeometry(isCentral: boolean): THREE.BufferGeometry {
+  const geom = new THREE.BoxGeometry(1.75, 2.5, 1.15, 22, 20, 16);
+  const pos = geom.attributes.position;
+  const scale = isCentral ? 1.0 : 0.88;
+
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i) * scale;
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
+
+    const ny = y / 1.25; // -1 to +1
+
+    // Chisel thinning: Crown thins in Z toward the incisal edge
+    const zThinning = 0.32 + (1.0 - ny) * 0.42;
+    z *= zThinning;
+
+    // Mesio-distal incisal flare (wider at biting edge, narrower at root)
+    if (ny > -0.2) {
+      x *= 1.0 + (ny + 0.2) * 0.25;
+    }
+
+    // Labial convexity (+Z)
+    if (z > 0 && ny > -0.3 && ny < 0.7) {
+      z += 0.1 * Math.sin(((ny + 0.3) / 1.0) * Math.PI);
+    }
+
+    // Lingual fossa concavity (-Z) in middle third
+    if (z < 0 && ny > -0.2 && ny < 0.6) {
+      z -= 0.12 * Math.sin(((ny + 0.2) / 0.8) * Math.PI);
+    }
+
+    // Lingual cingulum mound at cervical third (-Z, ny < -0.2)
+    if (z < 0 && ny < -0.2) {
+      z -= 0.18 * Math.cos(((ny + 0.65) / 0.45) * Math.PI * 0.5);
+    }
+
+    // Rounded incisal edge corners
+    if (ny > 0.85) {
+      y -= (x * x) * 0.06;
+    }
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
+ * 5. Full Crown Preparation Abutment (Tooth 46)
+ * Real Prosthodontic crown preparation:
+ * - 1.5mm anatomical occlusal reduction preserving cusp planes
+ * - Functional cusp bevel at 45°
+ * - 6° axial reduction convergence taper
+ * - 1.0mm circumferential chamfer margin shoulder
+ */
+function createCrownPreparationGeometry(): THREE.BufferGeometry {
+  const geom = new THREE.CylinderGeometry(1.28, 1.48, 1.9, 48, 24);
+  const pos = geom.attributes.position;
+
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i);
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
+
+    const ny = y / 0.95;
+
+    // Functional Cusp Bevel at 45° on buccal (+Z)
+    if (z > 0.5 && ny > 0.4) {
+      y -= (z - 0.5) * 0.35;
+    }
+
+    // Occlusal anatomical reduction clearance (planes preserved)
+    if (ny > 0.5) {
+      const r = Math.sqrt(x * x + z * z);
+      y -= (1.0 - Math.min(1.0, r / 1.2)) * 0.25;
+    }
+
+    // 6-8° axial reduction convergence taper
+    if (ny > 0) {
+      x *= 0.94;
+      z *= 0.94;
+    }
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
+ * 6. Volumetric Festooned Gingiva (Periodontal Tissue)
+ * Follows the EXACT parabolic curve of the dental arch.
+ * Generates anatomical scalloped cervical collars around each tooth
+ * and sharp, elevated Interdental Papillae rising between adjacent teeth.
+ */
+function createAnatomicalGingivalBase(toothCount: number = 14): THREE.BufferGeometry {
+  const archWidth = 8.5;
+  const segmentsU = 120;
+  const segmentsV = 20;
+
+  const geom = new THREE.PlaneGeometry(2, 2, segmentsU, segmentsV);
+  const pos = geom.attributes.position;
+
+  for (let i = 0; i < pos.count; i++) {
+    const rawU = pos.getX(i); // -1 to +1 along arch
+    const rawV = pos.getY(i); // -1 to +1 across ridge (lingual to buccal)
+
+    const u = rawU;
+    const archX = u * archWidth;
+    const archZ = (1 - Math.cos(u * Math.PI * 0.46)) * 8.0 - 4.0;
+
+    const dx = archWidth;
+    const dz = Math.sin(u * Math.PI * 0.46) * Math.PI * 0.46 * 8.0 * 0.5;
+    const len = Math.sqrt(dx * dx + dz * dz);
+
+    // Outward buccal normal vector
+    const nx = dz / len;
+    const nz = -dx / len;
+
+    // rawV: -1 is Lingual (tongue side), +1 is Buccal (cheek side)
+    const offsetDistance = rawV * 1.85;
+
+    // Interdental papilla wave along u (frequency matched to teeth)
+    const toothPhase = (u + 1) * 0.5 * (toothCount - 1);
+    const papilla = Math.sin(toothPhase * Math.PI * 2);
+
+    // Height y:
+    // Crest of gingiva is around rawV = 0 (right under the teeth)
+    let y = -0.45;
+    if (Math.abs(rawV) < 0.5) {
+      // Crest peaks with interdental papillae between teeth, dips slightly at tooth centers
+      y += (1.0 - Math.abs(rawV) / 0.5) * 0.35 + papilla * 0.28 * (1.0 - Math.abs(rawV) / 0.5);
+    } else {
+      // Slope down towards alveolar sulcus / vestibule
+      y -= (Math.abs(rawV) - 0.5) * 2.2;
+    }
+
+    const finalX = archX + nx * offsetDistance;
+    const finalZ = archZ + nz * offsetDistance;
+
+    pos.setXYZ(i, finalX, y, finalZ);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+}
+
+// ==========================================
+// Main React Component
+// ==========================================
 
 export const Intraoral3DViewer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,17 +381,16 @@ export const Intraoral3DViewer: React.FC = () => {
   const [hoveredTooth, setHoveredTooth] = useState<string | null>(null);
   const [activePreset, setActivePreset] = useState<'DEFAULT' | 'OCCLUSAL' | 'FACIAL' | 'PREP'>('DEFAULT');
 
-  // Three.js object references for reactive mutations without re-mounting
+  // Three.js mutable references
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const toothMaterialsRef = useRef<THREE.MeshPhysicalMaterial[]>([]);
-  const gingivaMaterialRef = useRef<THREE.MeshStandardMaterial | null>(null);
+  const gingivaMaterialRef = useRef<THREE.MeshPhysicalMaterial | null>(null);
   const prepMarginMaterialRef = useRef<THREE.MeshStandardMaterial | null>(null);
   const heatmapGroupRef = useRef<THREE.Group | null>(null);
   const toothMeshesRef = useRef<{ mesh: THREE.Mesh; fdi: string; name: string }[]>([]);
 
-  // Initialize Three.js WebGL Scene
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -81,64 +403,63 @@ export const Intraoral3DViewer: React.FC = () => {
     sceneRef.current = scene;
     scene.background = new THREE.Color(0x0a101d);
 
-    // 2. Camera: Centered and angled nicely to see the whole arch
+    // 2. Camera centered on the arch
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
     camera.position.set(0, 16, 22);
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
-    // 3. Renderer with antialiasing and shadow support
+    // 3. Renderer with high performance and drawing buffer for snapshot
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: false,
       powerPreference: 'high-performance',
-      preserveDrawingBuffer: true, // enables high-res snapshot
+      preserveDrawingBuffer: true,
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.18;
 
     container.replaceChildren(renderer.domElement);
 
-    // 4. Smooth OrbitControls
+    // 4. OrbitControls with smooth inertia
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.target.set(0, -0.5, 0);
-    controls.minDistance = 8;
+    controls.target.set(0, -0.4, 0);
+    controls.minDistance = 7;
     controls.maxDistance = 55;
-    controls.maxPolarAngle = Math.PI / 2 + 0.15; // prevent upside-down view
+    controls.maxPolarAngle = Math.PI / 2 + 0.12;
     controlsRef.current = controls;
 
     // 5. Studio Dental Lighting
-    // Ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.25);
     scene.add(ambientLight);
 
-    // Main Dental Operatory Spotlight
-    const mainSpotlight = new THREE.SpotLight(0xfffaf0, 3.2);
-    mainSpotlight.position.set(0, 28, 18);
-    mainSpotlight.angle = Math.PI / 3.5;
+    // Operatory Surgical Spotlight
+    const mainSpotlight = new THREE.SpotLight(0xfffaed, 3.4);
+    mainSpotlight.position.set(0, 26, 18);
+    mainSpotlight.angle = Math.PI / 3.4;
     mainSpotlight.penumbra = 0.5;
     mainSpotlight.castShadow = true;
     mainSpotlight.shadow.mapSize.width = 1024;
     mainSpotlight.shadow.mapSize.height = 1024;
     scene.add(mainSpotlight);
 
-    // Fill light from bottom
-    const fillLight = new THREE.DirectionalLight(0xa5f3fc, 0.7);
-    fillLight.position.set(0, -12, 10);
+    // Fill Light
+    const fillLight = new THREE.DirectionalLight(0xbbf7d0, 0.6);
+    fillLight.position.set(0, -10, 12);
     scene.add(fillLight);
 
-    // Lateral rim lights (Teal accent highlights)
-    const rimLeft = new THREE.DirectionalLight(0x14b8a6, 1.0);
+    // Teal Clinical Rim Lights
+    const rimLeft = new THREE.DirectionalLight(0x14b8a6, 0.95);
     rimLeft.position.set(-18, 8, -12);
     scene.add(rimLeft);
 
-    const rimRight = new THREE.DirectionalLight(0x0f766e, 0.9);
+    const rimRight = new THREE.DirectionalLight(0x0f766e, 0.85);
     rimRight.position.set(18, 8, -12);
     scene.add(rimRight);
 
@@ -146,23 +467,29 @@ export const Intraoral3DViewer: React.FC = () => {
     const toothMaterials: THREE.MeshPhysicalMaterial[] = [];
     toothMaterialsRef.current = toothMaterials;
 
+    // Neon Teal Active Chamfer Finish Line Material
     const prepMarginMaterial = new THREE.MeshStandardMaterial({
       color: 0x0f766e,
       emissive: 0x14b8a6,
-      emissiveIntensity: 0.8,
-      roughness: 0.25,
+      emissiveIntensity: 0.85,
+      roughness: 0.2,
       metalness: 0.1,
     });
     prepMarginMaterialRef.current = prepMarginMaterial;
 
-    const gingivaMaterial = new THREE.MeshStandardMaterial({
+    // Natural Coral Attached Gingiva Material (Double-sided for complete anatomical ridge)
+    const gingivaMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xd97580,
-      roughness: 0.45,
-      metalness: 0.05,
+      roughness: 0.42,
+      clearcoat: 0.35,
+      clearcoatRoughness: 0.2,
+      sheen: 0.45,
+      sheenColor: new THREE.Color(0xffa5b0),
+      side: THREE.DoubleSide,
     });
     gingivaMaterialRef.current = gingivaMaterial;
 
-    // 7. Anatomical Dental Arch Mesh Construction
+    // 7. Assemble 3D Dental Arch Model
     const modelGroup = new THREE.Group();
     const heatmapGroup = new THREE.Group();
     heatmapGroup.visible = false;
@@ -171,100 +498,118 @@ export const Intraoral3DViewer: React.FC = () => {
 
     toothMeshesRef.current = [];
 
-    const toothCount = MANDIBULAR_TEETH.length; // 14 teeth
+    const toothCount = MANDIBULAR_TEETH.length; // 14
     for (let i = 0; i < toothCount; i++) {
       const toothData = MANDIBULAR_TEETH[i];
 
-      // Normalized parameter u from -1 (left molar) to +1 (right molar)
+      // Parameter u along arch from -1 to +1
       const u = (i / (toothCount - 1)) * 2 - 1;
 
-      // Parabolic arch curve (x, z) centered at (0, 0)
+      // Parabolic arch equation
       const archWidth = 8.5;
-      const x = u * archWidth;
-      const z = (1 - Math.cos(u * Math.PI * 0.46)) * 8.0 - 4.0;
+      const archX = u * archWidth;
+      const archZ = (1 - Math.cos(u * Math.PI * 0.46)) * 8.0 - 4.0;
 
-      // Tangent angle for anatomical tooth rotation along arch
+      // Tangent and Outward Normal vectors
       const dx = archWidth;
       const dz = Math.sin(u * Math.PI * 0.46) * Math.PI * 0.46 * 8.0 * 0.5;
-      const rotationY = Math.atan2(dz, dx) - Math.PI / 2;
+      const len = Math.sqrt(dx * dx + dz * dz);
+      const nx = dz / len;
+      const nz = -dx / len;
 
-      // Create high-detail tooth material with realistic hydroxyapatite translucency
+      // Anatomical rotation: rotates tooth so its facial/buccal surface points outward
+      const rotY = Math.atan2(nx, nz);
+
+      // Realistic Translucent Enamel Material
       const toothMat = new THREE.MeshPhysicalMaterial({
         color: SHADE_CONFIG[dentalShade].color,
         roughness: SHADE_CONFIG[dentalShade].roughness,
         metalness: 0.04,
         clearcoat: 0.85,
         clearcoatRoughness: 0.1,
-        transmission: 0.12,
-        ior: 1.62,
+        transmission: 0.15, // realistic hydroxyapatite translucency
+        ior: 1.63,
+        attenuationColor: new THREE.Color(0xfff5e6),
+        attenuationDistance: 1.8,
         wireframe: wireframe,
       });
       toothMaterials.push(toothMat);
 
-      // Tooth geometry based on dental type
-      let toothMesh: THREE.Mesh;
+      // Select Anatomical Geometry
+      let toothGeom: THREE.BufferGeometry;
 
       if (toothData.isPrep) {
-        // Tooth 46: Prepared abutment for Crown (6° convergence, chamfer shoulder)
-        const prepGeom = new THREE.CylinderGeometry(1.25, 1.45, 1.8, 32);
-        toothMesh = new THREE.Mesh(prepGeom, toothMat);
-        toothMesh.position.set(x, 0.4, z);
+        // Tooth 46: Crown Abutment Preparation
+        toothGeom = createCrownPreparationGeometry();
+        const toothMesh = new THREE.Mesh(toothGeom, toothMat);
+        toothMesh.position.set(archX, 0.45, archZ);
+        toothMesh.rotation.y = rotY;
+        toothMesh.castShadow = true;
+        toothMesh.receiveShadow = true;
+        modelGroup.add(toothMesh);
 
-        // Active Chamfer Margin Ring (finish line)
+        // Chamfer Margin Finish Line Ring
         const marginRingGeom = new THREE.TorusGeometry(1.5, 0.14, 16, 48);
         const marginMesh = new THREE.Mesh(marginRingGeom, prepMarginMaterial);
-        marginMesh.position.set(x, -0.45, z);
+        marginMesh.position.set(archX, -0.42, archZ);
         marginMesh.rotation.x = Math.PI / 2;
+        marginMesh.rotation.y = rotY;
         modelGroup.add(marginMesh);
 
-        // Core build-up core top
-        const coreTopGeom = new THREE.CylinderGeometry(0.9, 1.25, 0.5, 32);
-        const coreMesh = new THREE.Mesh(coreTopGeom, toothMat);
-        coreMesh.position.set(x, 1.35, z);
+        // Core build-up composite core
+        const coreTopGeom = new THREE.CylinderGeometry(0.85, 1.25, 0.55, 32);
+        const coreMat = new THREE.MeshStandardMaterial({
+          color: 0xdfcca8, // warm dentin core
+          roughness: 0.35,
+        });
+        const coreMesh = new THREE.Mesh(coreTopGeom, coreMat);
+        coreMesh.position.set(archX, 1.35, archZ);
+        coreMesh.rotation.y = rotY;
         modelGroup.add(coreMesh);
-      } else if (toothData.type === 'molar') {
-        // Natural Molar: 4-cusp occlusal surface
-        const molarGeom = new THREE.CylinderGeometry(1.65, 1.8, 2.1, 32);
-        toothMesh = new THREE.Mesh(molarGeom, toothMat);
-        toothMesh.position.set(x, 0.5, z);
 
-        // Occlusal contact points (for Heatmap)
-        const contactGeom = new THREE.SphereGeometry(0.28, 16, 16);
+        toothMeshesRef.current.push({
+          mesh: toothMesh,
+          fdi: toothData.fdi,
+          name: toothData.name,
+        });
+        continue;
+      } else if (toothData.type === 'molar') {
+        toothGeom = createAnatomicalMolarGeometry();
+      } else if (toothData.type === 'premolar') {
+        toothGeom = createAnatomicalPremolarGeometry();
+      } else if (toothData.type === 'canine') {
+        toothGeom = createAnatomicalCanineGeometry();
+      } else if (toothData.type === 'incisor_central') {
+        toothGeom = createAnatomicalIncisorGeometry(true);
+      } else {
+        toothGeom = createAnatomicalIncisorGeometry(false);
+      }
+
+      const toothMesh = new THREE.Mesh(toothGeom, toothMat);
+      toothMesh.position.set(archX, 0.45, archZ);
+      toothMesh.rotation.y = rotY;
+      toothMesh.castShadow = true;
+      toothMesh.receiveShadow = true;
+      modelGroup.add(toothMesh);
+
+      // Occlusal contact points (for Heatmap mode)
+      if (toothData.type === 'molar') {
+        const contactGeom = new THREE.SphereGeometry(0.25, 16, 16);
         const redMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
         const greenMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
 
         const p1 = new THREE.Mesh(contactGeom, redMat);
-        p1.position.set(x + 0.4, 1.6, z + 0.3);
+        p1.position.set(archX + 0.45, 1.55, archZ + 0.35);
         const p2 = new THREE.Mesh(contactGeom, greenMat);
-        p2.position.set(x - 0.4, 1.6, z - 0.3);
+        p2.position.set(archX - 0.45, 1.55, archZ - 0.35);
         heatmapGroup.add(p1, p2);
       } else if (toothData.type === 'premolar') {
-        // Premolar: Bicuspid crown
-        const premolarGeom = new THREE.CylinderGeometry(1.25, 1.4, 2.3, 24);
-        toothMesh = new THREE.Mesh(premolarGeom, toothMat);
-        toothMesh.position.set(x, 0.6, z);
-
-        const contactGeom = new THREE.SphereGeometry(0.22, 16, 16);
+        const contactGeom = new THREE.SphereGeometry(0.2, 16, 16);
         const amberMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
         const p = new THREE.Mesh(contactGeom, amberMat);
-        p.position.set(x, 1.8, z);
+        p.position.set(archX, 1.65, archZ);
         heatmapGroup.add(p);
-      } else if (toothData.type === 'canine') {
-        // Canine: Pointed cusp tip
-        const canineGeom = new THREE.ConeGeometry(1.1, 2.7, 24);
-        toothMesh = new THREE.Mesh(canineGeom, toothMat);
-        toothMesh.position.set(x, 0.9, z);
-      } else {
-        // Incisor: Chisel-shaped incisal edge
-        const incisorGeom = new THREE.BoxGeometry(1.2, 2.6, 0.75);
-        toothMesh = new THREE.Mesh(incisorGeom, toothMat);
-        toothMesh.position.set(x, 0.8, z);
       }
-
-      toothMesh.rotation.y = rotationY;
-      toothMesh.castShadow = true;
-      toothMesh.receiveShadow = true;
-      modelGroup.add(toothMesh);
 
       toothMeshesRef.current.push({
         mesh: toothMesh,
@@ -273,23 +618,15 @@ export const Intraoral3DViewer: React.FC = () => {
       });
     }
 
-    // 8. Continuous Anatomical Gingiva / Gum Base
-    const gingivaPoints: THREE.Vector3[] = [];
-    for (let i = 0; i <= 24; i++) {
-      const u = (i / 24) * 2 - 1;
-      const gx = u * 9.0;
-      const gz = (1 - Math.cos(u * Math.PI * 0.46)) * 8.2 - 4.1;
-      gingivaPoints.push(new THREE.Vector3(gx, -0.6, gz));
-    }
-    const gingivaCurve = new THREE.CatmullRomCurve3(gingivaPoints);
-    const gingivaGeom = new THREE.TubeGeometry(gingivaCurve, 64, 1.4, 16, false);
+    // 8. Anatomical Festooned Gingiva with Interdental Papillae
+    const gingivaGeom = createAnatomicalGingivalBase(toothCount);
     const gingivaMesh = new THREE.Mesh(gingivaGeom, gingivaMaterial);
     gingivaMesh.receiveShadow = true;
     modelGroup.add(gingivaMesh);
 
     scene.add(modelGroup);
 
-    // 9. Interactive Raycasting on Mouse Move (Hover tooth detection)
+    // 9. Interactive Raycasting on Mouse Move
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -322,13 +659,13 @@ export const Intraoral3DViewer: React.FC = () => {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Pulsating glow on preparation finish line when viewMode is MARGIN
+      // Pulsating Finish Line Glow when in MARGIN mode
       if (prepMarginMaterialRef.current) {
         if (viewMode === 'MARGIN') {
           const pulse = 1.0 + Math.sin(elapsedTime * 4.5) * 0.6;
-          prepMarginMaterialRef.current.emissiveIntensity = pulse * 1.5;
+          prepMarginMaterialRef.current.emissiveIntensity = pulse * 1.6;
         } else {
-          prepMarginMaterialRef.current.emissiveIntensity = 0.7;
+          prepMarginMaterialRef.current.emissiveIntensity = 0.75;
         }
       }
 
@@ -337,7 +674,7 @@ export const Intraoral3DViewer: React.FC = () => {
     };
     animate();
 
-    // 11. Responsive Resize Observer
+    // 11. Resize Observer
     const handleResize = () => {
       if (!containerRef.current) return;
       const newWidth = containerRef.current.clientWidth || 800;
@@ -350,7 +687,6 @@ export const Intraoral3DViewer: React.FC = () => {
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
-    // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
@@ -358,9 +694,9 @@ export const Intraoral3DViewer: React.FC = () => {
       controls.dispose();
       renderer.dispose();
     };
-  }, []); // Run once on mount; reactive states are handled below
+  }, []);
 
-  // 1. Reactive VITA Shade Update (without canvas reload)
+  // 1. Reactive VITA Shade Update
   useEffect(() => {
     const config = SHADE_CONFIG[dentalShade];
     toothMaterialsRef.current.forEach((mat) => {
@@ -382,7 +718,7 @@ export const Intraoral3DViewer: React.FC = () => {
     }
   }, [wireframe]);
 
-  // 3. Reactive ViewMode Update (Natural / Margin / Heatmap)
+  // 3. Reactive ViewMode Update
   useEffect(() => {
     if (heatmapGroupRef.current) {
       heatmapGroupRef.current.visible = viewMode === 'HEATMAP';
@@ -390,7 +726,7 @@ export const Intraoral3DViewer: React.FC = () => {
 
     if (viewMode === 'MARGIN') {
       toothMaterialsRef.current.forEach((mat) => {
-        mat.transmission = 0.45; // translucent so prep margin stands out
+        mat.transmission = 0.48; // translucent
         mat.needsUpdate = true;
       });
       if (prepMarginMaterialRef.current) {
@@ -399,7 +735,7 @@ export const Intraoral3DViewer: React.FC = () => {
       }
     } else {
       toothMaterialsRef.current.forEach((mat) => {
-        mat.transmission = 0.12;
+        mat.transmission = 0.15;
         mat.needsUpdate = true;
       });
       if (prepMarginMaterialRef.current) {
@@ -419,21 +755,17 @@ export const Intraoral3DViewer: React.FC = () => {
     const controls = controlsRef.current;
 
     if (preset === 'OCCLUSAL') {
-      // Direct Top-Down Occlusal View
       camera.position.set(0, 24, 0.1);
-      controls.target.set(0, -0.5, 0);
+      controls.target.set(0, -0.4, 0);
     } else if (preset === 'FACIAL') {
-      // Frontal Anterior View
       camera.position.set(0, 3, 22);
       controls.target.set(0, 0, 0);
     } else if (preset === 'PREP') {
-      // Focused Zoom on Tooth 46 Abutment Preparation
       camera.position.set(7.8, 5.5, 6.5);
       controls.target.set(7.5, 0.5, 3.2);
     } else {
-      // Default Studio Perspective
       camera.position.set(0, 16, 22);
-      controls.target.set(0, -0.5, 0);
+      controls.target.set(0, -0.4, 0);
     }
     controls.update();
   };
@@ -470,7 +802,7 @@ export const Intraoral3DViewer: React.FC = () => {
                 Three.js WebGL Engine
               </Badge>
               <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-300 text-[10px] font-bold">
-                Resolusi CAD/CAM 20µm
+                Morfologi Anatomi Presisi
               </Badge>
             </CardTitle>
             <p className="text-xs text-text-secondary mt-0.5">
@@ -503,7 +835,7 @@ export const Intraoral3DViewer: React.FC = () => {
       </CardHeader>
 
       <CardContent className="p-0 relative">
-        {/* 3D WebGL Canvas Container with guaranteed height */}
+        {/* 3D WebGL Canvas Container */}
         <div
           ref={containerRef}
           className="w-full h-[520px] cursor-grab active:cursor-grabbing relative bg-gradient-to-b from-[#090e18] via-[#0d1627] to-[#090e18] select-none"

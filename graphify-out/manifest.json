@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "src/components/clinical/intraoral-3d-viewer.tsx": {
-    "mtime": 1790329935.9345002,
-    "ast_hash": "0c4846f02b3d556e1d3b97944c0e9169",
+    "mtime": 1790331996.160253,
+    "ast_hash": "5b5fd2110d1d39100180273d2a7886b1",
     "semantic_hash": ""
   },
   "src/components/clinical/xray-dicom-viewer.tsx": {
