@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1790328404.4144175,
-    "ast_hash": "44808490e4e3c22dde65740aa0ced32b",
+    "mtime": 1790328951.604596,
+    "ast_hash": "3282e1b3268a512c3eeaa0c76fa99553",
     "semantic_hash": ""
   },
   "src/components/clinical/chair-status-grid.tsx": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/sliding-tabs.tsx": {
-    "mtime": 1790323558.2986214,
-    "ast_hash": "ade93fcdbff290085904b77f94527fb3",
+    "mtime": 1790328929.9792318,
+    "ast_hash": "835a851205b56cf222418ad8d183854a",
     "semantic_hash": ""
   },
   "src/components/ui/table.tsx": {

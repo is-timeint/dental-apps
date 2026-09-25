@@ -205,8 +205,8 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1790323392.3857205,
-    "ast_hash": "01e8142356e15c3404e0d84c48187cd0",
+    "mtime": 1790328643.7129219,
+    "ast_hash": "91e2c4aaf0152cf94e9790e0e9a36151",
     "semantic_hash": ""
   },
   "README.md": {
@@ -352,6 +352,16 @@
   "src/components/modules/satusehat-view.tsx": {
     "mtime": 1790328367.732531,
     "ast_hash": "c410871c59e892d2419c2400c6f4f054",
+    "semantic_hash": ""
+  },
+  ".agents/rules/micro-interactions.md": {
+    "mtime": 1790328622.5563853,
+    "ast_hash": "5316c5154a3d5afc02799c900f840563",
+    "semantic_hash": ""
+  },
+  ".agents/rules/prevent-generic-ai-look.md": {
+    "mtime": 1790328610.3613017,
+    "ast_hash": "525573257a23ba6c59fad71b974892a0",
     "semantic_hash": ""
   }
 }

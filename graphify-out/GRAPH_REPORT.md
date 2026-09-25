@@ -1,16 +1,16 @@
 # Graph Report - Dental-Apps  (2026-09-25)
 
 ## Corpus Check
-- 68 files · ~32,277 words
+- 68 files · ~32,350 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 504 nodes · 666 edges · 50 communities (43 shown, 7 thin omitted)
+- 505 nodes · 671 edges · 49 communities (42 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3d5d4904`
+- Built from commit: `8c16e921`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,11 +54,10 @@
 - next.config.ts
 - postcss.config.mjs
 - 20260925_init_dental_schema.sql
-- sliding-tabs.tsx
 - Rule: Prevent Generic AI Look & Enforce Humanized Design
 
 ## God Nodes (most connected - your core abstractions)
-1. `triggerHapticFeedback()` - 25 edges
+1. `triggerHapticFeedback()` - 27 edges
 2. `5. Spesifikasi Kebutuhan Fungsional (FRD)` - 17 edges
 3. `compilerOptions` - 16 edges
 4. `Button()` - 12 edges
@@ -84,7 +83,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (50 total, 7 thin omitted)
+## Communities (49 total, 7 thin omitted)
 
 ### Community 0 - "UI/UX, Motion Physics & Micro-Interaction Standards"
 Cohesion: 0.08
@@ -111,8 +110,8 @@ Cohesion: 0.10
 Nodes (19): 1.1 OWASP API Security Top 10 + Standar Klinis, 1.2 Multi-Tenancy & Clinical Data Isolation, 1.3 Keamanan Berkas Medis (Rontgen, Foto Intraoral, DICOM), 1.4 Perlindungan PHI / PII & Kebijakan Zero-Logging, 1.5 Next.js App Router & Server Actions Hardening, 1.6 Rate Limiting, Brute Force & Anti-Scraping, 1.7 Concurrency Control & Database Locking (Race Condition Prevention), 1.8 Immutable Medico-Legal Audit Trail (+11 more)
 
 ### Community 6 - "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)"
-Cohesion: 0.12
-Nodes (35): Home(), ChairStatusGrid(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), OdontogramTooth(), PeriodontalPreview(), QueueCard() (+27 more)
+Cohesion: 0.11
+Nodes (40): CLINICAL_TABS, Home(), ChairStatusGrid(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), OdontogramTooth(), PeriodontalPreview() (+32 more)
 
 ### Community 7 - "5. Standar Modal, Dialog, dan Bottom Sheet"
 Cohesion: 0.07
@@ -214,16 +213,12 @@ Nodes (6): 1. Prevent Generic AI Look & Enforce Humanized Design (MANDATORY), 2.
 Cohesion: 0.61
 Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, encounters, invoices, odontogram_surfaces (+3 more)
 
-### Community 48 - "sliding-tabs.tsx"
-Cohesion: 0.40
-Nodes (3): StandardSlidingTabsProps, TabItem, haptic
-
 ### Community 49 - "Rule: Prevent Generic AI Look & Enforce Humanized Design"
 Cohesion: 0.33
 Nodes (5): 1. Prinsip Canvas & Tata Letak Ruang Nyata, 2. Tipografi & Konten Medis Manusiawi, 3. Disiplin Warna & Karantina Medis, 4. Kehangatan Humanis & Ergonomi Pengguna, Rule: Prevent Generic AI Look & Enforce Humanized Design
 
 ## Knowledge Gaps
-- **250 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+245 more)
+- **251 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+246 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -235,7 +230,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `react` connect `drawer.tsx` to `dependencies`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _250 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _251 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI/UX, Motion Physics & Micro-Interaction Standards` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Product Requirement Document (PRD)` be split into smaller, more focused modules?**
