@@ -28,9 +28,13 @@ export default function RootLayout({
   return (
     <html
       lang="id"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-canvas-background text-text-primary">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-canvas-background text-text-primary"
+      >
         <Providers>{children}</Providers>
         <Toaster position="top-right" richColors />
       </body>
