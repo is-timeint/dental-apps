@@ -1236,10 +1236,54 @@
       "norm_label": "intraoral-3d-viewer.tsx"
     },
     {
+      "label": "DentalShade",
+      "file_type": "code",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "src_components_clinical_intraoral_3d_viewer_dentalshade",
+      "community": 6,
+      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "norm_label": "dentalshade"
+    },
+    {
+      "label": "ViewMode",
+      "file_type": "code",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "src_components_clinical_intraoral_3d_viewer_viewmode",
+      "community": 6,
+      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "norm_label": "viewmode"
+    },
+    {
+      "label": "SHADE_CONFIG",
+      "file_type": "code",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "src_components_clinical_intraoral_3d_viewer_shade_config",
+      "community": 6,
+      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "norm_label": "shade_config"
+    },
+    {
+      "label": "MANDIBULAR_TEETH",
+      "file_type": "code",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "src_components_clinical_intraoral_3d_viewer_mandibular_teeth",
+      "community": 6,
+      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "norm_label": "mandibular_teeth"
+    },
+    {
       "label": "Intraoral3DViewer()",
       "file_type": "code",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L22",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_components_clinical_intraoral_3d_viewer_intraoral3dviewer",
       "community": 6,
@@ -4113,8 +4157,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "prd_dental_apps_5_spesifikasi_kebutuhan_fungsional_frd",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5. spesifikasi kebutuhan fungsional (frd)"
     },
     {
@@ -4124,8 +4168,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "prd_dental_apps_5_1_modul_1_live_floor_chair_operations",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.1 modul 1: live floor & chair operations"
     },
     {
@@ -4135,8 +4179,8 @@
       "source_location": "L156",
       "_origin": "ast",
       "id": "prd_dental_apps_5_2_modul_2_clinical_workspace_odontogram_2_0_core_emr",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.2 modul 2: clinical workspace & odontogram 2.0 (core emr)"
     },
     {
@@ -4146,8 +4190,8 @@
       "source_location": "L173",
       "_origin": "ast",
       "id": "prd_dental_apps_5_3_modul_3_dental_lab_hub_schedule_interlock",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.3 modul 3: dental lab hub & schedule interlock"
     },
     {
@@ -4157,8 +4201,8 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "prd_dental_apps_5_4_modul_4_inventaris_smart_bmhp_procedure_based_bom",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.4 modul 4: inventaris & smart bmhp (procedure-based bom)"
     },
     {
@@ -4168,8 +4212,8 @@
       "source_location": "L184",
       "_origin": "ast",
       "id": "prd_dental_apps_5_5_modul_5_billing_pos_commission_engine",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.5 modul 5: billing, pos & commission engine"
     },
     {
@@ -4179,8 +4223,8 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "prd_dental_apps_5_6_modul_6_local_edge_agent_auto_x_ray_ingestion",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.6 modul 6: local edge agent (auto x-ray ingestion)"
     },
     {
@@ -4190,8 +4234,8 @@
       "source_location": "L195",
       "_origin": "ast",
       "id": "prd_dental_apps_5_7_modul_7_satusehat_interoperability_engine",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.7 modul 7: satusehat interoperability engine"
     },
     {
@@ -4201,8 +4245,8 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "prd_dental_apps_5_8_modul_8_automated_whatsapp_crm_patient_recall_engine",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.8 modul 8: automated whatsapp crm & patient recall engine"
     },
     {
@@ -4212,8 +4256,8 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "prd_dental_apps_5_9_modul_9_multi_branch_logistics_inter_branch_stock_transfer",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.9 modul 9: multi-branch logistics & inter-branch stock transfer"
     },
     {
@@ -4223,8 +4267,8 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "prd_dental_apps_5_10_modul_10_tpa_corporate_insurance_claim_splitter",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.10 modul 10: tpa & corporate insurance claim splitter"
     },
     {
@@ -4234,8 +4278,8 @@
       "source_location": "L213",
       "_origin": "ast",
       "id": "prd_dental_apps_5_11_modul_11_e_prescription_kamus_farmasi_kfa_kemenkes",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.11 modul 11: e-prescription & kamus farmasi (kfa kemenkes)"
     },
     {
@@ -4245,8 +4289,8 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "prd_dental_apps_5_12_modul_12_periodontal_charting_oral_hygiene_index_pemeriksaan_gusi",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.12 modul 12: periodontal charting & oral hygiene index (pemeriksaan gusi)"
     },
     {
@@ -4256,8 +4300,8 @@
       "source_location": "L225",
       "_origin": "ast",
       "id": "prd_dental_apps_5_13_modul_13_physical_queue_tv_display_audio_calling_system",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.13 modul 13: physical queue tv display & audio calling system"
     },
     {
@@ -4267,8 +4311,8 @@
       "source_location": "L231",
       "_origin": "ast",
       "id": "prd_dental_apps_5_14_modul_14_clinical_safety_interlock_triage_medis_vital_signs",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.14 modul 14: clinical safety interlock & triage medis (vital signs)"
     },
     {
@@ -4278,8 +4322,8 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "prd_dental_apps_5_15_modul_15_rekonsiliasi_kasir_shift_management_refund_workflow",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.15 modul 15: rekonsiliasi kasir, shift management & refund workflow"
     },
     {
@@ -4289,8 +4333,8 @@
       "source_location": "L244",
       "_origin": "ast",
       "id": "prd_dental_apps_5_16_modul_16_bridging_bpjs_kesehatan_p_care_gigi_add_on_extension",
-      "community": 48,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.16 modul 16: bridging bpjs kesehatan p-care gigi (add-on extension)"
     },
     {
@@ -7859,7 +7903,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L22",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_clinical_intraoral_3d_viewer",
+      "target": "src_components_clinical_intraoral_3d_viewer_dentalshade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7867,11 +7922,44 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_clinical_intraoral_3d_viewer",
+      "target": "src_components_clinical_intraoral_3d_viewer_mandibular_teeth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_clinical_intraoral_3d_viewer",
+      "target": "src_components_clinical_intraoral_3d_viewer_shade_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_clinical_intraoral_3d_viewer",
+      "target": "src_components_clinical_intraoral_3d_viewer_viewmode",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7883,7 +7971,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7895,7 +7983,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7907,7 +7995,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7919,7 +8007,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7931,7 +8019,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7943,7 +8031,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7955,7 +8043,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7967,7 +8055,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7979,7 +8067,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L19",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -7991,7 +8079,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L19",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer",
@@ -8004,7 +8092,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/clinical/intraoral-3d-viewer.tsx",
-      "source_location": "L236",
+      "source_location": "L414",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_clinical_intraoral_3d_viewer_intraoral3dviewer",
@@ -14218,5 +14306,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9bc4d9f83539d15556afa261ca9cc6dc6cad3228"
+  "built_at_commit": "2e8858b12eaee37e42f51eadfb06f4edeac3b2e7"
 }
