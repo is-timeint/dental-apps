@@ -1143,8 +1143,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "src_components_clinical_odontogram_tooth_odontogramtooth",
-      "community": 14,
-      "community_name": "useDentalStore.ts",
+      "community": 6,
+      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
       "norm_label": "odontogramtooth()"
     },
     {
@@ -2452,8 +2452,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_motion",
-      "community": 6,
-      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "community": 14,
+      "community_name": "useDentalStore.ts",
       "norm_label": "motion.ts"
     },
     {
@@ -2463,8 +2463,8 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "src_lib_motion_motion_constants",
-      "community": 6,
-      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "community": 14,
+      "community_name": "useDentalStore.ts",
       "norm_label": "motion_constants"
     },
     {
@@ -2474,8 +2474,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "src_lib_motion_damped_springs",
-      "community": 6,
-      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "community": 14,
+      "community_name": "useDentalStore.ts",
       "norm_label": "damped_springs"
     },
     {
@@ -2485,8 +2485,8 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_lib_motion_tabslidevariants",
-      "community": 6,
-      "community_name": "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)",
+      "community": 14,
+      "community_name": "useDentalStore.ts",
       "norm_label": "tabslidevariants"
     },
     {
@@ -3260,6 +3260,182 @@
       "norm_label": "graphify"
     },
     {
+      "label": "micro-interactions.md",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "micro-interactions.md"
+    },
+    {
+      "label": "Rule: Micro-Interactions, Motion Physics & Tactile Standards",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_rule_micro_interactions_motion_physics_tactile_standards",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "rule: micro-interactions, motion physics & tactile standards"
+    },
+    {
+      "label": "1. Damped Spring Physics (No Linear Animations)",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_1_damped_spring_physics_no_linear_animations",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "1. damped spring physics (no linear animations)"
+    },
+    {
+      "label": "2. Standar Micro-Interaction per Komponen Utama",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2. standar micro-interaction per komponen utama"
+    },
+    {
+      "label": "2.1 Odontogram 2.0 (Vector 5-Surface Tooth)",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_1_odontogram_2_0_vector_5_surface_tooth",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2.1 odontogram 2.0 (vector 5-surface tooth)"
+    },
+    {
+      "label": "2.2 Direction-Aware Sliding Tabs",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_2_direction_aware_sliding_tabs",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2.2 direction-aware sliding tabs"
+    },
+    {
+      "label": "2.3 Velocity-Aware Swipeable Queue Cards",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_3_velocity_aware_swipeable_queue_cards",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2.3 velocity-aware swipeable queue cards"
+    },
+    {
+      "label": "2.4 Rolling Number Ticker",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_4_rolling_number_ticker",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2.4 rolling number ticker"
+    },
+    {
+      "label": "2.5 Live Floor Breathing Pulse",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_2_5_live_floor_breathing_pulse",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "2.5 live floor breathing pulse"
+    },
+    {
+      "label": "3. Touch Engine Lockdown (Kenyamanan Touchscreen Tablet)",
+      "file_type": "document",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "agents_rules_micro_interactions_3_touch_engine_lockdown_kenyamanan_touchscreen_tablet",
+      "community": 2,
+      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "norm_label": "3. touch engine lockdown (kenyamanan touchscreen tablet)"
+    },
+    {
+      "label": "prevent-generic-ai-look.md",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "prevent-generic-ai-look.md"
+    },
+    {
+      "label": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "rule: prevent generic ai look & enforce humanized design"
+    },
+    {
+      "label": "1. Prinsip Canvas & Tata Letak Ruang Nyata",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look_1_prinsip_canvas_tata_letak_ruang_nyata",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "1. prinsip canvas & tata letak ruang nyata"
+    },
+    {
+      "label": "2. Tipografi & Konten Medis Manusiawi",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look_2_tipografi_konten_medis_manusiawi",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "2. tipografi & konten medis manusiawi"
+    },
+    {
+      "label": "3. Disiplin Warna & Karantina Medis",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look_3_disiplin_warna_karantina_medis",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "3. disiplin warna & karantina medis"
+    },
+    {
+      "label": "4. Kehangatan Humanis & Ergonomi Pengguna",
+      "file_type": "document",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "agents_rules_prevent_generic_ai_look_4_kehangatan_humanis_ergonomi_pengguna",
+      "community": 49,
+      "community_name": "Rule: Prevent Generic AI Look & Enforce Humanized Design",
+      "norm_label": "4. kehangatan humanis & ergonomi pengguna"
+    },
+    {
       "label": "workflows/graphify.md",
       "file_type": "document",
       "source_file": ".agents/workflows/graphify.md",
@@ -3302,6 +3478,61 @@
       "community": 37,
       "community_name": "AGENTS.md",
       "norm_label": "this is not the next.js you know"
+    },
+    {
+      "label": "DENTAL-APPS PMS/EDR PROJECT RULES",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "agents_dental_apps_pms_edr_project_rules",
+      "community": 37,
+      "community_name": "AGENTS.md",
+      "norm_label": "dental-apps pms/edr project rules"
+    },
+    {
+      "label": "1. Prevent Generic AI Look & Enforce Humanized Design (MANDATORY)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "agents_1_prevent_generic_ai_look_enforce_humanized_design_mandatory",
+      "community": 37,
+      "community_name": "AGENTS.md",
+      "norm_label": "1. prevent generic ai look & enforce humanized design (mandatory)"
+    },
+    {
+      "label": "2. Micro-Interactions, Motion Physics & Tactile Standards (MANDATORY)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "agents_2_micro_interactions_motion_physics_tactile_standards_mandatory",
+      "community": 37,
+      "community_name": "AGENTS.md",
+      "norm_label": "2. micro-interactions, motion physics & tactile standards (mandatory)"
+    },
+    {
+      "label": "3. Medical-Grade Security & Multi-Tenancy (MANDATORY)",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "agents_3_medical_grade_security_multi_tenancy_mandatory",
+      "community": 37,
+      "community_name": "AGENTS.md",
+      "norm_label": "3. medical-grade security & multi-tenancy (mandatory)"
+    },
+    {
+      "label": "4. Graphify Knowledge Graph Rule",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "agents_4_graphify_knowledge_graph_rule",
+      "community": 37,
+      "community_name": "AGENTS.md",
+      "norm_label": "4. graphify knowledge graph rule"
     },
     {
       "label": "CLAUDE.md",
@@ -3508,8 +3739,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "prd_dental_apps_5_spesifikasi_kebutuhan_fungsional_frd",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5. spesifikasi kebutuhan fungsional (frd)"
     },
     {
@@ -3519,8 +3750,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "prd_dental_apps_5_1_modul_1_live_floor_chair_operations",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.1 modul 1: live floor & chair operations"
     },
     {
@@ -3530,8 +3761,8 @@
       "source_location": "L156",
       "_origin": "ast",
       "id": "prd_dental_apps_5_2_modul_2_clinical_workspace_odontogram_2_0_core_emr",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.2 modul 2: clinical workspace & odontogram 2.0 (core emr)"
     },
     {
@@ -3541,8 +3772,8 @@
       "source_location": "L173",
       "_origin": "ast",
       "id": "prd_dental_apps_5_3_modul_3_dental_lab_hub_schedule_interlock",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.3 modul 3: dental lab hub & schedule interlock"
     },
     {
@@ -3552,8 +3783,8 @@
       "source_location": "L178",
       "_origin": "ast",
       "id": "prd_dental_apps_5_4_modul_4_inventaris_smart_bmhp_procedure_based_bom",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.4 modul 4: inventaris & smart bmhp (procedure-based bom)"
     },
     {
@@ -3563,8 +3794,8 @@
       "source_location": "L184",
       "_origin": "ast",
       "id": "prd_dental_apps_5_5_modul_5_billing_pos_commission_engine",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.5 modul 5: billing, pos & commission engine"
     },
     {
@@ -3574,8 +3805,8 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "prd_dental_apps_5_6_modul_6_local_edge_agent_auto_x_ray_ingestion",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.6 modul 6: local edge agent (auto x-ray ingestion)"
     },
     {
@@ -3585,8 +3816,8 @@
       "source_location": "L195",
       "_origin": "ast",
       "id": "prd_dental_apps_5_7_modul_7_satusehat_interoperability_engine",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.7 modul 7: satusehat interoperability engine"
     },
     {
@@ -3596,8 +3827,8 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "prd_dental_apps_5_8_modul_8_automated_whatsapp_crm_patient_recall_engine",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.8 modul 8: automated whatsapp crm & patient recall engine"
     },
     {
@@ -3607,8 +3838,8 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "prd_dental_apps_5_9_modul_9_multi_branch_logistics_inter_branch_stock_transfer",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.9 modul 9: multi-branch logistics & inter-branch stock transfer"
     },
     {
@@ -3618,8 +3849,8 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "prd_dental_apps_5_10_modul_10_tpa_corporate_insurance_claim_splitter",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.10 modul 10: tpa & corporate insurance claim splitter"
     },
     {
@@ -3629,8 +3860,8 @@
       "source_location": "L213",
       "_origin": "ast",
       "id": "prd_dental_apps_5_11_modul_11_e_prescription_kamus_farmasi_kfa_kemenkes",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.11 modul 11: e-prescription & kamus farmasi (kfa kemenkes)"
     },
     {
@@ -3640,8 +3871,8 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "prd_dental_apps_5_12_modul_12_periodontal_charting_oral_hygiene_index_pemeriksaan_gusi",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.12 modul 12: periodontal charting & oral hygiene index (pemeriksaan gusi)"
     },
     {
@@ -3651,8 +3882,8 @@
       "source_location": "L225",
       "_origin": "ast",
       "id": "prd_dental_apps_5_13_modul_13_physical_queue_tv_display_audio_calling_system",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.13 modul 13: physical queue tv display & audio calling system"
     },
     {
@@ -3662,8 +3893,8 @@
       "source_location": "L231",
       "_origin": "ast",
       "id": "prd_dental_apps_5_14_modul_14_clinical_safety_interlock_triage_medis_vital_signs",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.14 modul 14: clinical safety interlock & triage medis (vital signs)"
     },
     {
@@ -3673,8 +3904,8 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "prd_dental_apps_5_15_modul_15_rekonsiliasi_kasir_shift_management_refund_workflow",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.15 modul 15: rekonsiliasi kasir, shift management & refund workflow"
     },
     {
@@ -3684,8 +3915,8 @@
       "source_location": "L244",
       "_origin": "ast",
       "id": "prd_dental_apps_5_16_modul_16_bridging_bpjs_kesehatan_p_care_gigi_add_on_extension",
-      "community": 2,
-      "community_name": "5. Spesifikasi Kebutuhan Fungsional (FRD)",
+      "community": 1,
+      "community_name": "Product Requirement Document (PRD)",
       "norm_label": "5.16 modul 16: bridging bpjs kesehatan p-care gigi (add-on extension)"
     },
     {
@@ -10867,6 +11098,160 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions",
+      "target": "agents_rules_micro_interactions_rule_micro_interactions_motion_physics_tactile_standards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_rule_micro_interactions_motion_physics_tactile_standards",
+      "target": "agents_rules_micro_interactions_1_damped_spring_physics_no_linear_animations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_rule_micro_interactions_motion_physics_tactile_standards",
+      "target": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_rule_micro_interactions_motion_physics_tactile_standards",
+      "target": "agents_rules_micro_interactions_3_touch_engine_lockdown_kenyamanan_touchscreen_tablet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "target": "agents_rules_micro_interactions_2_1_odontogram_2_0_vector_5_surface_tooth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "target": "agents_rules_micro_interactions_2_2_direction_aware_sliding_tabs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "target": "agents_rules_micro_interactions_2_3_velocity_aware_swipeable_queue_cards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "target": "agents_rules_micro_interactions_2_4_rolling_number_ticker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/micro-interactions.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_micro_interactions_2_standar_micro_interaction_per_komponen_utama",
+      "target": "agents_rules_micro_interactions_2_5_live_floor_breathing_pulse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_prevent_generic_ai_look",
+      "target": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "target": "agents_rules_prevent_generic_ai_look_1_prinsip_canvas_tata_letak_ruang_nyata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "target": "agents_rules_prevent_generic_ai_look_2_tipografi_konten_medis_manusiawi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "target": "agents_rules_prevent_generic_ai_look_3_disiplin_warna_karantina_medis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agents/rules/prevent-generic-ai-look.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_rules_prevent_generic_ai_look_rule_prevent_generic_ai_look_enforce_humanized_design",
+      "target": "agents_rules_prevent_generic_ai_look_4_kehangatan_humanis_ergonomi_pengguna",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": ".agents/workflows/graphify.md",
       "source_location": "L6",
       "weight": 1.0,
@@ -10879,11 +11264,66 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents",
+      "target": "agents_dental_apps_pms_edr_project_rules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
       "source": "agents",
       "target": "agents_this_is_not_the_next_js_you_know",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_dental_apps_pms_edr_project_rules",
+      "target": "agents_1_prevent_generic_ai_look_enforce_humanized_design_mandatory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_dental_apps_pms_edr_project_rules",
+      "target": "agents_2_micro_interactions_motion_physics_tactile_standards_mandatory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_dental_apps_pms_edr_project_rules",
+      "target": "agents_3_medical_grade_security_multi_tenancy_mandatory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "agents_dental_apps_pms_edr_project_rules",
+      "target": "agents_4_graphify_knowledge_graph_rule",
       "confidence_score": 1.0
     },
     {
@@ -12670,5 +13110,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "536c91ba9b8ae8b7b61693777a0887c7f60087b6"
+  "built_at_commit": "3d5d4904ab1d50f6297ce48774a6550be2b30795"
 }
