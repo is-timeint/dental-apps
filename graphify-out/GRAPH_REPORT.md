@@ -1,16 +1,16 @@
 # Graph Report - Dental-Apps  (2026-09-25)
 
 ## Corpus Check
-- 68 files · ~32,350 words
+- 73 files · ~35,355 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 505 nodes · 671 edges · 49 communities (42 shown, 7 thin omitted)
+- 538 nodes · 729 edges · 52 communities (44 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8c16e921`
+- Built from commit: `9bc4d9f8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,19 +54,22 @@
 - next.config.ts
 - postcss.config.mjs
 - 20260925_init_dental_schema.sql
+- 5. Spesifikasi Kebutuhan Fungsional (FRD)
 - Rule: Prevent Generic AI Look & Enforce Humanized Design
+- bullmq.ts
+- presigned-url.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `triggerHapticFeedback()` - 27 edges
+1. `triggerHapticFeedback()` - 31 edges
 2. `5. Spesifikasi Kebutuhan Fungsional (FRD)` - 17 edges
 3. `compilerOptions` - 16 edges
-4. `Button()` - 12 edges
-5. `Badge()` - 11 edges
-6. `useDentalStore` - 11 edges
-7. `clinics` - 11 edges
-8. `Product Requirement Document (PRD)` - 11 edges
-9. `Dental-Apps — Project Development Guidelines & Security Standards` - 10 edges
-10. `1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)` - 10 edges
+4. `Button()` - 14 edges
+5. `Badge()` - 13 edges
+6. `Card()` - 11 edges
+7. `CardContent()` - 11 edges
+8. `useDentalStore` - 11 edges
+9. `clinics` - 11 edges
+10. `Product Requirement Document (PRD)` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Drawer()` --references--> `react`  [EXTRACTED]
@@ -83,15 +86,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (49 total, 7 thin omitted)
+## Communities (52 total, 8 thin omitted)
 
 ### Community 0 - "UI/UX, Motion Physics & Micro-Interaction Standards"
 Cohesion: 0.08
 Nodes (25): 1.1 Token Fisika Gerak (Motion Constants), 1.2 Velocity-Aware Inertial Tracking (Responsivitas Kecepatan Geser), 1. Prinsip Interaksi & Standar Motion Fisika, 2.1 Spesifikasi Gerak Tab, 2.2 Template Komponen Tab Standar (React + Framer Motion), 2. Standar Transisi Tab: Direction-Aware Sliding & Staggered Reveal, 3.1 Spesifikasi Kompresi Mikro Pegas (Tactile Scale Dip), 3.2 Efek Serapan Tinta Klinis (Liquid Ink Fill Effect) (+17 more)
 
 ### Community 1 - "Product Requirement Document (PRD)"
-Cohesion: 0.05
-Nodes (42): 1.1 Latar Belakang, 1.2 Masalah Utama Industri, 1.3 Tujuan Produk (Objectives), 1. Executive Summary & Problem Statements, 2.1 Multi-Tenancy & Tenant Scoping Mutlak, 2.2 Role-Based Access Control (RBAC) Klinis, 2. User Persona, Access Control (RBAC) & Multi-Tenancy, 3.1 Frontend & Touch Engine (+34 more)
+Cohesion: 0.08
+Nodes (25): 1.1 Latar Belakang, 1.2 Masalah Utama Industri, 1.3 Tujuan Produk (Objectives), 1. Executive Summary & Problem Statements, 2.1 Multi-Tenancy & Tenant Scoping Mutlak, 2.2 Role-Based Access Control (RBAC) Klinis, 2. User Persona, Access Control (RBAC) & Multi-Tenancy, 3.1 Frontend & Touch Engine (+17 more)
 
 ### Community 2 - "5. Spesifikasi Kebutuhan Fungsional (FRD)"
 Cohesion: 0.20
@@ -111,7 +114,7 @@ Nodes (19): 1.1 OWASP API Security Top 10 + Standar Klinis, 1.2 Multi-Tenancy & 
 
 ### Community 6 - "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)"
 Cohesion: 0.11
-Nodes (40): CLINICAL_TABS, Home(), ChairStatusGrid(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), OdontogramTooth(), PeriodontalPreview() (+32 more)
+Nodes (42): CLINICAL_TABS, Home(), ChairStatusGrid(), Intraoral3DViewer(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), OdontogramTooth() (+34 more)
 
 ### Community 7 - "5. Standar Modal, Dialog, dan Bottom Sheet"
 Cohesion: 0.07
@@ -122,8 +125,8 @@ Cohesion: 0.08
 Nodes (25): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+17 more)
 
 ### Community 12 - "dependencies"
-Cohesion: 0.07
-Nodes (29): @base-ui/react, class-variance-authority, cn, framer-motion, lucide-react, next, dependencies, @base-ui/react (+21 more)
+Cohesion: 0.05
+Nodes (43): @aws-sdk/client-s3, @aws-sdk/s3-request-presigner, @base-ui/react, bullmq, class-variance-authority, cn, framer-motion, ioredis (+35 more)
 
 ### Community 13 - "components.json"
 Cohesion: 0.09
@@ -162,8 +165,8 @@ Cohesion: 0.40
 Nodes (4): 1. Ringkasan Klinis Periodonsia, 2. Metodologi 6-Point Probing Per Gigi, 3. Ambang Batas Klinis & Visual Alert, Modul 12: Periodontal Charting & OHI-S (Pemeriksaan Gusi)
 
 ### Community 26 - "layout.tsx"
-Cohesion: 0.40
-Nodes (3): geistMono, geistSans, metadata
+Cohesion: 0.33
+Nodes (4): geistMono, geistSans, metadata, Providers()
 
 ### Community 27 - "Modul 05: Billing, POS & Commission Engine"
 Cohesion: 0.50
@@ -213,28 +216,36 @@ Nodes (6): 1. Prevent Generic AI Look & Enforce Humanized Design (MANDATORY), 2.
 Cohesion: 0.61
 Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, encounters, invoices, odontogram_surfaces (+3 more)
 
+### Community 48 - "5. Spesifikasi Kebutuhan Fungsional (FRD)"
+Cohesion: 0.12
+Nodes (17): 5.10 Modul 10: TPA & Corporate Insurance Claim Splitter, 5.11 Modul 11: e-Prescription & Kamus Farmasi (KFA Kemenkes), 5.12 Modul 12: Periodontal Charting & Oral Hygiene Index (Pemeriksaan Gusi), 5.13 Modul 13: Physical Queue TV Display & Audio Calling System, 5.14 Modul 14: Clinical Safety Interlock & Triage Medis (Vital Signs), 5.15 Modul 15: Rekonsiliasi Kasir, Shift Management & Refund Workflow, 5.16 Modul 16: Bridging BPJS Kesehatan P-Care Gigi (Add-On Extension), 5.1 Modul 1: Live Floor & Chair Operations (+9 more)
+
 ### Community 49 - "Rule: Prevent Generic AI Look & Enforce Humanized Design"
 Cohesion: 0.33
 Nodes (5): 1. Prinsip Canvas & Tata Letak Ruang Nyata, 2. Tipografi & Konten Medis Manusiawi, 3. Disiplin Warna & Karantina Medis, 4. Kehangatan Humanis & Ergonomi Pengguna, Rule: Prevent Generic AI Look & Enforce Humanized Design
 
+### Community 50 - "bullmq.ts"
+Cohesion: 0.29
+Nodes (5): bpjsPcareQueue, dentalLabQueue, redisConnection, satuSehatQueue, whatsAppCrmQueue
+
 ## Knowledge Gaps
-- **251 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+246 more)
+- **265 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+260 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `1. Executive Summary & Problem Statements`, `drawer.tsx`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Why does `react` connect `drawer.tsx` to `dependencies`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _251 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _265 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI/UX, Motion Physics & Micro-Interaction Standards` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Product Requirement Document (PRD)` be split into smaller, more focused modules?**
-  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Dental-Apps — Skill Orchestration & Unified Synergy Framework` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
 - **Should `Dental-Apps — Project Development Guidelines & Security Standards` be split into smaller, more focused modules?**

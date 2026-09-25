@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790327220.02974,
-    "ast_hash": "9187c76aff58268a7b5ce5228e7f6b2b",
+    "mtime": 1790329198.000018,
+    "ast_hash": "f8b11e28f081d30f91e342e7aacbe1a3",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -70,13 +70,13 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1790323548.227185,
-    "ast_hash": "00514025ce0266cc63b1c74757b7cc3a",
+    "mtime": 1790329228.4514349,
+    "ast_hash": "5e74f8fdb941ea0966a80167627a9044",
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1790328951.604596,
-    "ast_hash": "3282e1b3268a512c3eeaa0c76fa99553",
+    "mtime": 1790329407.687835,
+    "ast_hash": "95a485515171b455e937439cc21d6bc7",
     "semantic_hash": ""
   },
   "src/components/clinical/chair-status-grid.tsx": {
@@ -362,6 +362,31 @@
   ".agents/rules/prevent-generic-ai-look.md": {
     "mtime": 1790328610.3613017,
     "ast_hash": "525573257a23ba6c59fad71b974892a0",
+    "semantic_hash": ""
+  },
+  "src/app/providers.tsx": {
+    "mtime": 1790329209.9954531,
+    "ast_hash": "de1e206869b9222eb2965f7d8b804810",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/intraoral-3d-viewer.tsx": {
+    "mtime": 1790329247.575253,
+    "ast_hash": "62e5c10670c32280efc27103841a8304",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/xray-dicom-viewer.tsx": {
+    "mtime": 1790329263.7952263,
+    "ast_hash": "b5cdb3b3e7344343a88e272dac80a858",
+    "semantic_hash": ""
+  },
+  "src/lib/queue/bullmq.ts": {
+    "mtime": 1790329288.2345455,
+    "ast_hash": "b7acb851555dea4ff164817103f6bbe2",
+    "semantic_hash": ""
+  },
+  "src/lib/storage/presigned-url.ts": {
+    "mtime": 1790329277.2249532,
+    "ast_hash": "dea6082785a0a79be0c6af7283e6602e",
     "semantic_hash": ""
   }
 }

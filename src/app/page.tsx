@@ -11,6 +11,8 @@ import { DentalLabView } from '@/components/modules/dental-lab-view';
 import { BmhpInventoryView } from '@/components/modules/bmhp-inventory-view';
 import { SatuSehatView } from '@/components/modules/satusehat-view';
 import { BpjsPcareView } from '@/components/modules/bpjs-pcare-view';
+import { Intraoral3DViewer } from '@/components/clinical/intraoral-3d-viewer';
+import { XrayDicomViewer } from '@/components/clinical/xray-dicom-viewer';
 import { StandardSlidingTabs, TabItem } from '@/components/ui/sliding-tabs';
 import { RollingNumberTicker } from '@/components/ui/rolling-ticker';
 import { useDentalStore } from '@/store/useDentalStore';
@@ -53,6 +55,7 @@ const CLINICAL_TABS: TabItem[] = [
 export default function Home() {
   const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
   const [activeSidebarModule, setActiveSidebarModule] = useState<ModuleId>('odontogram');
+  const [emrSubMode, setEmrSubMode] = useState<'ODONTOGRAM' | 'DICOM_XRAY' | 'INTRAORAL_3D'>('ODONTOGRAM');
 
   const {
     dailyRevenue,
@@ -86,6 +89,11 @@ export default function Home() {
     switch (id) {
       case 'odontogram':
         setActiveTabIdx(0);
+        setEmrSubMode('ODONTOGRAM');
+        break;
+      case 'xray-agent':
+        setActiveTabIdx(0);
+        setEmrSubMode('DICOM_XRAY');
         break;
       case 'live-floor':
         setActiveTabIdx(1);
@@ -107,7 +115,6 @@ export default function Home() {
         break;
       case 'bmhp-inventory':
       case 'logistics':
-      case 'xray-agent':
         setActiveTabIdx(6);
         break;
       case 'satusehat':
@@ -274,8 +281,64 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Edge-to-Edge Odontogram Canvas & Clinical Inspector */}
-                    <OdontogramGrid />
+                    {/* EMR Modality Switcher (PRD 3.1: SVG Odontogram, 2D DICOM, Three.js 3D) */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 p-2 bg-surface-subtle border border-border-subtle rounded-2xl">
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            triggerHapticFeedback('selection');
+                            setEmrSubMode('ODONTOGRAM');
+                          }}
+                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                            emrSubMode === 'ODONTOGRAM'
+                              ? 'bg-brand-primary text-white shadow-xs'
+                              : 'text-text-secondary hover:text-text-primary'
+                          }`}
+                        >
+                          Bagan Odontogram 2D (FDI)
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            triggerHapticFeedback('selection');
+                            setEmrSubMode('DICOM_XRAY');
+                          }}
+                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                            emrSubMode === 'DICOM_XRAY'
+                              ? 'bg-brand-primary text-white shadow-xs'
+                              : 'text-text-secondary hover:text-text-primary'
+                          }`}
+                        >
+                          Radiologi DICOM 2D (Cornerstone)
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            triggerHapticFeedback('selection');
+                            setEmrSubMode('INTRAORAL_3D');
+                          }}
+                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                            emrSubMode === 'INTRAORAL_3D'
+                              ? 'bg-brand-primary text-white shadow-xs'
+                              : 'text-text-secondary hover:text-text-primary'
+                          }`}
+                        >
+                          Pemindai 3D Intraoral (Three.js STL)
+                        </button>
+                      </div>
+
+                      <div className="text-[11px] text-text-muted px-2">
+                        Pencitraan Medis & 3D (PRD 3.1)
+                      </div>
+                    </div>
+
+                    {/* Modality View Body */}
+                    {emrSubMode === 'ODONTOGRAM' && <OdontogramGrid />}
+                    {emrSubMode === 'DICOM_XRAY' && <XrayDicomViewer />}
+                    {emrSubMode === 'INTRAORAL_3D' && <Intraoral3DViewer />}
                   </div>
                 );
               }

@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "Next-Gen Touch-First Dental Practice Management System (EDR/PMS)",
 };
 
+import { Providers } from "./providers";
+
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-canvas-background text-text-primary">
-        {children}
+        <Providers>{children}</Providers>
         <Toaster position="top-right" richColors />
       </body>
     </html>
