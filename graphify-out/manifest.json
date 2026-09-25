@@ -1,0 +1,332 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1790323413.9180026,
+    "ast_hash": "951fb0df7f82a2eef75744b961a2d89b",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1790322637.4950292,
+    "ast_hash": "f1e53ecc9194573d3c28fc116c743a2e",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1790322637.49544,
+    "ast_hash": "0bc020d491fca99550c1ea3de0a5f862",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1790323413.9176385,
+    "ast_hash": "03e3d38ba74cf8886d3d8fc322d9da8a",
+    "semantic_hash": ""
+  },
+  "PRD-dental-apps.md": {
+    "mtime": 1790321917.3834903,
+    "ast_hash": "cf58fafdcd0ba213cfe4a0341825261f",
+    "semantic_hash": ""
+  },
+  "color-palette.md": {
+    "mtime": 1790322515.840429,
+    "ast_hash": "aa12fc2d374649bda29108d2ca979684",
+    "semantic_hash": ""
+  },
+  "design-standards.md": {
+    "mtime": 1790322215.102312,
+    "ast_hash": "15bc22b1f972f29bee5f227adaa30323",
+    "semantic_hash": ""
+  },
+  "security_and_quality.md": {
+    "mtime": 1790322839.2488573,
+    "ast_hash": "55551263642b87ddcd27c3c7a58f5ea7",
+    "semantic_hash": ""
+  },
+  "skill_orchestration.md": {
+    "mtime": 1790322848.801926,
+    "ast_hash": "5c6edae2a045898b14ec7131b8b4c3d3",
+    "semantic_hash": ""
+  },
+  "components.json": {
+    "mtime": 1790323457.0910501,
+    "ast_hash": "fc5c9e9a7b93eeb2f7b4e1ce0959e4a6",
+    "semantic_hash": ""
+  },
+  "eslint.config.mjs": {
+    "mtime": 1790323392.386879,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": ""
+  },
+  "next.config.ts": {
+    "mtime": 1790323392.3874154,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1790327220.02974,
+    "ast_hash": "9187c76aff58268a7b5ce5228e7f6b2b",
+    "semantic_hash": ""
+  },
+  "postcss.config.mjs": {
+    "mtime": 1790323399.0476103,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1790323548.227185,
+    "ast_hash": "00514025ce0266cc63b1c74757b7cc3a",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1790323778.3291273,
+    "ast_hash": "293a5302389ea4a7f666cf512e4ff029",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/chair-status-grid.tsx": {
+    "mtime": 1790323724.3525999,
+    "ast_hash": "534eebc1cb11499e9239007ef65e0d3b",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/odontogram-grid.tsx": {
+    "mtime": 1790323713.0134585,
+    "ast_hash": "72b3d8e8727086b2e3338f46dcd36645",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/odontogram-tooth.tsx": {
+    "mtime": 1790323693.64898,
+    "ast_hash": "79c004483af7f23cdbb8b0608b8ff212",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/periodontal-preview.tsx": {
+    "mtime": 1790323744.4658248,
+    "ast_hash": "a5ee3ede2cf1a20bd291183bf2947a78",
+    "semantic_hash": ""
+  },
+  "src/components/clinical/queue-card.tsx": {
+    "mtime": 1790323735.5492904,
+    "ast_hash": "50d4699541d57072a01084a292fbb45e",
+    "semantic_hash": ""
+  },
+  "src/components/layout/top-nav.tsx": {
+    "mtime": 1790323849.9971921,
+    "ast_hash": "d083da8f03c880f57431f2457075c569",
+    "semantic_hash": ""
+  },
+  "src/components/ui/avatar.tsx": {
+    "mtime": 1790323491.53516,
+    "ast_hash": "8912ae7bffbac8ab6a153861b5de52c7",
+    "semantic_hash": ""
+  },
+  "src/components/ui/badge.tsx": {
+    "mtime": 1790323491.370179,
+    "ast_hash": "b2427bd0bd8c25c554f5a648c286e8e4",
+    "semantic_hash": ""
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1790323465.3077936,
+    "ast_hash": "2700bddde0ac66fc6f2fc1b56fcfdc2d",
+    "semantic_hash": ""
+  },
+  "src/components/ui/card.tsx": {
+    "mtime": 1790323491.3449159,
+    "ast_hash": "7a1907244a8ac28f77cb4d2eaf496811",
+    "semantic_hash": ""
+  },
+  "src/components/ui/dialog.tsx": {
+    "mtime": 1790323491.6096604,
+    "ast_hash": "140a6a27b4baf69a6ce2cb1f626ab43e",
+    "semantic_hash": ""
+  },
+  "src/components/ui/drawer.tsx": {
+    "mtime": 1790323491.3983905,
+    "ast_hash": "6be5c38dddda8613b5bbfb5f1538f193",
+    "semantic_hash": ""
+  },
+  "src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1790323491.4527686,
+    "ast_hash": "6191a1c056e1453c42b1ceeb9b7a096a",
+    "semantic_hash": ""
+  },
+  "src/components/ui/input.tsx": {
+    "mtime": 1790323491.490162,
+    "ast_hash": "7548c6f7aef9d450575ca4d25e378346",
+    "semantic_hash": ""
+  },
+  "src/components/ui/rolling-ticker.tsx": {
+    "mtime": 1790323564.6510887,
+    "ast_hash": "9aa6089d59a5c7d524d07a71066506c5",
+    "semantic_hash": ""
+  },
+  "src/components/ui/separator.tsx": {
+    "mtime": 1790323491.5579722,
+    "ast_hash": "68ef96041727d804c3b82aeade49c246",
+    "semantic_hash": ""
+  },
+  "src/components/ui/sliding-tabs.tsx": {
+    "mtime": 1790323558.2986214,
+    "ast_hash": "ade93fcdbff290085904b77f94527fb3",
+    "semantic_hash": ""
+  },
+  "src/components/ui/table.tsx": {
+    "mtime": 1790323491.5131683,
+    "ast_hash": "c8c2da1704112a7f341c8cf6452d46d8",
+    "semantic_hash": ""
+  },
+  "src/components/ui/tabs.tsx": {
+    "mtime": 1790323491.3174067,
+    "ast_hash": "a916071b9d68c5ab3393b9573ed8cad1",
+    "semantic_hash": ""
+  },
+  "src/lib/haptic.ts": {
+    "mtime": 1790323813.7567108,
+    "ast_hash": "580e98517f9310db4489ee654c98df9d",
+    "semantic_hash": ""
+  },
+  "src/lib/motion.ts": {
+    "mtime": 1790323827.5310268,
+    "ast_hash": "d95222b93139783d46abe43c718ac494",
+    "semantic_hash": ""
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1790323465.3344133,
+    "ast_hash": "0482d21cfeab8cfcfe44f94927e45afb",
+    "semantic_hash": ""
+  },
+  "src/store/useDentalStore.ts": {
+    "mtime": 1790323679.123848,
+    "ast_hash": "5aa554e28778f86ac19756e5475ff507",
+    "semantic_hash": ""
+  },
+  "src/types/dental.ts": {
+    "mtime": 1790323662.6477702,
+    "ast_hash": "2c62d6aff35777bf294880266a1b3fb6",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1790323399.050945,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1790323392.3857205,
+    "ast_hash": "01e8142356e15c3404e0d84c48187cd0",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1790323392.3864362,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": ""
+  },
+  "docs/README.md": {
+    "mtime": 1790323639.4344242,
+    "ast_hash": "bda454948fc62266c639db297311caaa",
+    "semantic_hash": ""
+  },
+  "docs/modules/01-live-floor.md": {
+    "mtime": 1790323648.2485423,
+    "ast_hash": "40f3ed1aee7fd60e79865ab143c6b4dd",
+    "semantic_hash": ""
+  },
+  "docs/modules/02-odontogram-emr.md": {
+    "mtime": 1790323654.9080133,
+    "ast_hash": "4ca050cba09aef24b25401007a8f8996",
+    "semantic_hash": ""
+  },
+  "docs/modules/03-dental-lab-hub.md": {
+    "mtime": 1790323863.1153636,
+    "ast_hash": "f8d7ffe6fe6ec1e921a0a8b62c09bc71",
+    "semantic_hash": ""
+  },
+  "docs/modules/04-inventaris-bmhp.md": {
+    "mtime": 1790323872.402245,
+    "ast_hash": "ea87f6d84cc432adb2abfd3854868e70",
+    "semantic_hash": ""
+  },
+  "docs/modules/05-billing-pos.md": {
+    "mtime": 1790323882.7110572,
+    "ast_hash": "cde251372406322524cc7deb64c2f3e6",
+    "semantic_hash": ""
+  },
+  "docs/modules/06-local-edge-agent.md": {
+    "mtime": 1790323896.5940669,
+    "ast_hash": "1265b883984c2ebc86177080dd45a04e",
+    "semantic_hash": ""
+  },
+  "docs/modules/07-satusehat-engine.md": {
+    "mtime": 1790323904.1121657,
+    "ast_hash": "7b82e3297cc1ee05810174d036e7be2a",
+    "semantic_hash": ""
+  },
+  "docs/modules/11-e-prescription-kfa.md": {
+    "mtime": 1790323911.164295,
+    "ast_hash": "4967c92193e894777a379af1dd08a90e",
+    "semantic_hash": ""
+  },
+  "docs/modules/12-periodontal-charting.md": {
+    "mtime": 1790323919.0381217,
+    "ast_hash": "8081a45a2b7a0ab8fe3464bda61a91d0",
+    "semantic_hash": ""
+  },
+  "docs/modules/13-queue-tv-display.md": {
+    "mtime": 1790323926.6277537,
+    "ast_hash": "f07a24264c575efde8fa1f1a5bc1f251",
+    "semantic_hash": ""
+  },
+  "docs/modules/14-clinical-safety-interlock.md": {
+    "mtime": 1790323932.7257664,
+    "ast_hash": "72a1ecfef4ea72a896f55f49ba6ed0bf",
+    "semantic_hash": ""
+  },
+  "docs/modules/15-cashier-reconciliation.md": {
+    "mtime": 1790323939.1309707,
+    "ast_hash": "dc5e43a0b77fb8998aaf5ac9d23b867e",
+    "semantic_hash": ""
+  },
+  "docs/modules/16-bpjs-pcare-bridging.md": {
+    "mtime": 1790323945.4101117,
+    "ast_hash": "03e6018292655a6e2e6eb60e70179430",
+    "semantic_hash": ""
+  },
+  "public/file.svg": {
+    "mtime": 1790323399.0480497,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": ""
+  },
+  "public/globe.svg": {
+    "mtime": 1790323399.0489104,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": ""
+  },
+  "public/next.svg": {
+    "mtime": 1790323399.0485132,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": ""
+  },
+  "public/vercel.svg": {
+    "mtime": 1790323399.0482893,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": ""
+  },
+  "public/window.svg": {
+    "mtime": 1790323399.04923,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/admin.ts": {
+    "mtime": 1790327268.440846,
+    "ast_hash": "fc2722bd0877bdba441359ccd2cf3d80",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/client.ts": {
+    "mtime": 1790327256.313983,
+    "ast_hash": "0fcd46865aa959be0b36035511310e72",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/server.ts": {
+    "mtime": 1790327262.247686,
+    "ast_hash": "03ec44f2831cebd761b54592522c4be4",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260925_init_dental_schema.sql": {
+    "mtime": 1790327283.966666,
+    "ast_hash": "c3ad3e276e6dfb52940fc4363a1ec278",
+    "semantic_hash": ""
+  }
+}
