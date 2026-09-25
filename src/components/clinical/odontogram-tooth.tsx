@@ -14,8 +14,9 @@ interface OdontogramToothProps {
   onPaintSurface: (fdi: number, surface: ToothSurface, condition: ToothCondition) => void;
 }
 
-const CONDITION_COLORS: Record<ToothCondition, string> = {
-  HEALTHY: 'var(--surface-card, #FFFFFF)',
+// Strict Medical Quarantine Color Palette (color-palette.md STD-COL-001 Section 3)
+const CONDITION_FILLS: Record<ToothCondition, string> = {
+  HEALTHY: 'var(--tooth-enamel, #FAFAF7)',
   CARIES: '#EF4444',
   RESTORED: '#059669',
   ENDO: '#D97706',
@@ -25,6 +26,45 @@ const CONDITION_COLORS: Record<ToothCondition, string> = {
   CALCULUS: '#EAB308',
 };
 
+// Map FDI numbers to anatomical Indonesian clinical names
+const FDI_ANATOMICAL_NAMES: Record<number, string> = {
+  18: 'Molar 3 Kanan Atas (Wisdom)',
+  17: 'Molar 2 Kanan Atas',
+  16: 'Molar 1 Kanan Atas',
+  15: 'Premolar 2 Kanan Atas',
+  14: 'Premolar 1 Kanan Atas',
+  13: 'Kaninus Kanan Atas (Taring)',
+  12: 'Insisivus 2 Kanan Atas (Seri Lateral)',
+  11: 'Insisivus 1 Kanan Atas (Seri Sentral)',
+
+  21: 'Insisivus 1 Kiri Atas (Seri Sentral)',
+  22: 'Insisivus 2 Kiri Atas (Seri Lateral)',
+  23: 'Kaninus Kiri Atas (Taring)',
+  24: 'Premolar 1 Kiri Atas',
+  25: 'Premolar 2 Kiri Atas',
+  26: 'Molar 1 Kiri Atas',
+  27: 'Molar 2 Kiri Atas',
+  28: 'Molar 3 Kiri Atas (Wisdom)',
+
+  48: 'Molar 3 Kanan Bawah (Wisdom)',
+  47: 'Molar 2 Kanan Bawah',
+  46: 'Molar 1 Kanan Bawah',
+  45: 'Premolar 2 Kanan Bawah',
+  44: 'Premolar 1 Kanan Bawah',
+  43: 'Kaninus Kanan Bawah (Taring)',
+  42: 'Insisivus 2 Kanan Bawah',
+  41: 'Insisivus 1 Kanan Bawah',
+
+  31: 'Insisivus 1 Kiri Bawah',
+  32: 'Insisivus 2 Kiri Bawah',
+  33: 'Kaninus Kiri Bawah (Taring)',
+  34: 'Premolar 1 Kiri Bawah',
+  35: 'Premolar 2 Kiri Bawah',
+  36: 'Molar 1 Kiri Bawah',
+  37: 'Molar 2 Kiri Bawah',
+  38: 'Molar 3 Kiri Bawah (Wisdom)',
+};
+
 export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
   tooth,
   isSelected,
@@ -32,18 +72,14 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
   onSelectTooth,
   onPaintSurface,
 }) => {
-  const [ripplingSurface, setRipplingSurface] = useState<ToothSurface | null>(null);
+  const [lastClickedSurface, setLastClickedSurface] = useState<ToothSurface | null>(null);
 
   const isUpperArch = tooth.fdiNumber >= 11 && tooth.fdiNumber <= 28;
   const isRightSide =
     (tooth.fdiNumber >= 11 && tooth.fdiNumber <= 18) ||
     (tooth.fdiNumber >= 41 && tooth.fdiNumber <= 48);
 
-  // Mesial is towards the midline; Distal is away
-  // For Right Quadrant (Q1, Q4): Midline is on the right side of the tooth visually
-  // So Mesial is right polygon, Distal is left polygon.
-  // For Left Quadrant (Q2, Q3): Midline is on the left side of the tooth visually
-  // So Mesial is left polygon, Distal is right polygon.
+  // Dental orientation: Mesial is towards dental midline, Distal is away
   const leftSurface: ToothSurface = isRightSide ? 'D' : 'M';
   const rightSurface: ToothSurface = isRightSide ? 'M' : 'D';
   const topSurface: ToothSurface = isUpperArch ? 'B' : 'L';
@@ -52,8 +88,8 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
   const handleSurfaceClick = (e: React.MouseEvent, surface: ToothSurface) => {
     e.stopPropagation();
     triggerHapticFeedback('light');
-    setRipplingSurface(surface);
-    setTimeout(() => setRipplingSurface(null), 300);
+    setLastClickedSurface(surface);
+    setTimeout(() => setLastClickedSurface(null), 300);
     onPaintSurface(tooth.fdiNumber, surface, activeTool);
     onSelectTooth(tooth.fdiNumber);
   };
@@ -63,44 +99,72 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
   const isEndo = tooth.generalCondition === 'ENDO';
   const isCrown = tooth.generalCondition === 'CROWN';
 
+  const hasPathology =
+    Object.values(tooth.surfaces).some((cond) => cond !== 'HEALTHY') ||
+    (tooth.generalCondition && tooth.generalCondition !== 'HEALTHY');
+
   return (
     <motion.div
       onClick={() => {
-        triggerHapticFeedback('light');
+        triggerHapticFeedback('selection');
         onSelectTooth(tooth.fdiNumber);
       }}
-      whileHover={{ y: -3 }}
+      whileHover={{ y: -3, scale: 1.02 }}
       whileTap={{ scale: 0.94 }}
       transition={DAMPED_SPRINGS.tactile}
-      className={`relative flex flex-col items-center p-1.5 rounded-xl cursor-pointer transition-colors duration-200 select-none ${
+      title={`${tooth.fdiNumber} — ${FDI_ANATOMICAL_NAMES[tooth.fdiNumber] || 'Elemen Gigi'}`}
+      className={`group relative flex flex-col items-center p-2 rounded-2xl cursor-pointer transition-all duration-200 select-none ${
         isSelected
-          ? 'bg-teal-500/10 ring-2 ring-teal-600 dark:ring-teal-400 shadow-sm'
-          : 'hover:bg-slate-100 dark:hover:bg-slate-800/60'
+          ? 'bg-teal-500/10 ring-2 ring-brand-primary shadow-sm'
+          : hasPathology
+          ? 'bg-amber-500/5 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-amber-300/40 dark:border-amber-700/30'
+          : 'hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-transparent'
       }`}
     >
       {/* FDI Tooth Number */}
-      <span
-        className={`text-xs font-mono font-bold tracking-tight mb-1 ${
-          isSelected
-            ? 'text-teal-700 dark:text-teal-300 scale-105'
-            : 'text-slate-600 dark:text-slate-400'
-        }`}
-      >
-        {tooth.fdiNumber}
-      </span>
+      <div className="flex items-center gap-1 mb-1.5">
+        <span
+          className={`font-mono text-xs font-black tracking-tight px-1.5 py-0.5 rounded-md transition-colors ${
+            isSelected
+              ? 'bg-brand-primary text-white shadow-2xs'
+              : 'text-text-primary bg-surface-subtle group-hover:bg-brand-primary/10 group-hover:text-brand-primary'
+          }`}
+        >
+          {tooth.fdiNumber}
+        </span>
+      </div>
 
-      {/* SVG 5-Surface Anatomical FDI Tooth Model */}
-      <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center">
+      {/* Anatomical 5-Surface FDI Tooth Model */}
+      <div className="relative w-12 h-12 sm:w-13 sm:h-13 md:w-14 md:h-14 flex items-center justify-center">
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-full drop-shadow-xs overflow-visible"
+          className="w-full h-full drop-shadow-[0_1px_2px_rgba(0,0,0,0.06)] overflow-visible"
         >
+          <defs>
+            <radialGradient id={`enamel-glow-${tooth.fdiNumber}`} cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#EDECE8" stopOpacity="1" />
+            </radialGradient>
+          </defs>
+
+          {/* Outer Tooth Enamel Base Shadow */}
+          <rect
+            x="2"
+            y="2"
+            width="96"
+            height="96"
+            rx="16"
+            fill="var(--surface-subtle, #F1F3F5)"
+            stroke="var(--border-strong, #CBD5E1)"
+            strokeWidth="1.5"
+          />
+
           {/* Top Surface (Buccal/Lingual) */}
           <polygon
-            points="0,0 100,0 75,25 25,25"
-            fill={CONDITION_COLORS[tooth.surfaces[topSurface]]}
-            stroke="var(--border-strong, #CBD5E1)"
-            strokeWidth="3"
+            points="6,6 94,6 74,26 26,26"
+            fill={CONDITION_FILLS[tooth.surfaces[topSurface]]}
+            stroke="var(--border-strong, #94A3B8)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             className="transition-colors duration-200 hover:brightness-95 active:brightness-90 cursor-pointer"
             onClick={(e) => handleSurfaceClick(e, topSurface)}
@@ -108,10 +172,10 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
 
           {/* Bottom Surface (Lingual/Buccal) */}
           <polygon
-            points="25,75 75,75 100,100 0,100"
-            fill={CONDITION_COLORS[tooth.surfaces[bottomSurface]]}
-            stroke="var(--border-strong, #CBD5E1)"
-            strokeWidth="3"
+            points="26,74 74,74 94,94 6,94"
+            fill={CONDITION_FILLS[tooth.surfaces[bottomSurface]]}
+            stroke="var(--border-strong, #94A3B8)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             className="transition-colors duration-200 hover:brightness-95 active:brightness-90 cursor-pointer"
             onClick={(e) => handleSurfaceClick(e, bottomSurface)}
@@ -119,10 +183,10 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
 
           {/* Left Surface (Mesial or Distal) */}
           <polygon
-            points="0,0 25,25 25,75 0,100"
-            fill={CONDITION_COLORS[tooth.surfaces[leftSurface]]}
-            stroke="var(--border-strong, #CBD5E1)"
-            strokeWidth="3"
+            points="6,6 26,26 26,74 6,94"
+            fill={CONDITION_FILLS[tooth.surfaces[leftSurface]]}
+            stroke="var(--border-strong, #94A3B8)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             className="transition-colors duration-200 hover:brightness-95 active:brightness-90 cursor-pointer"
             onClick={(e) => handleSurfaceClick(e, leftSurface)}
@@ -130,89 +194,92 @@ export const OdontogramTooth: React.FC<OdontogramToothProps> = ({
 
           {/* Right Surface (Distal or Mesial) */}
           <polygon
-            points="100,0 100,100 75,75 75,25"
-            fill={CONDITION_COLORS[tooth.surfaces[rightSurface]]}
-            stroke="var(--border-strong, #CBD5E1)"
-            strokeWidth="3"
+            points="94,6 94,94 74,74 74,26"
+            fill={CONDITION_FILLS[tooth.surfaces[rightSurface]]}
+            stroke="var(--border-strong, #94A3B8)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             className="transition-colors duration-200 hover:brightness-95 active:brightness-90 cursor-pointer"
             onClick={(e) => handleSurfaceClick(e, rightSurface)}
           />
 
-          {/* Center Surface (Occlusal / Incisal) */}
+          {/* Center Occlusal / Incisal Pit Surface */}
           <polygon
-            points="25,25 75,25 75,75 25,75"
-            fill={CONDITION_COLORS[tooth.surfaces.O]}
-            stroke="var(--border-strong, #CBD5E1)"
-            strokeWidth="3"
+            points="26,26 74,26 74,74 26,74"
+            fill={CONDITION_FILLS[tooth.surfaces.O]}
+            stroke="var(--border-strong, #94A3B8)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
             className="transition-colors duration-200 hover:brightness-95 active:brightness-90 cursor-pointer"
             onClick={(e) => handleSurfaceClick(e, 'O')}
           />
 
-          {/* Missing Tooth Overlay (X-Line) */}
+          {/* Missing Tooth Overlay (Crossed Bars) */}
           {isMissing && (
-            <g stroke="#EF4444" strokeWidth="5" strokeLinecap="round">
-              <line x1="5" y1="5" x2="95" y2="95" />
-              <line x1="95" y1="5" x2="5" y2="95" />
+            <g stroke="#64748B" strokeWidth="6" strokeLinecap="round">
+              <line x1="10" y1="10" x2="90" y2="90" />
+              <line x1="90" y1="10" x2="10" y2="90" />
             </g>
           )}
 
           {/* Radix (Sisa Akar) Overlay */}
           {isRadix && (
-            <circle cx="50" cy="50" r="16" fill="#B91C1C" opacity="0.85" />
+            <g>
+              <circle cx="50" cy="50" r="20" fill="#B91C1C" opacity="0.9" />
+              <line x1="38" y1="50" x2="62" y2="50" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" />
+            </g>
           )}
 
-          {/* Crown (Mahkota Tiruan) Overlay Border */}
+          {/* Crown Overlay Border */}
           {isCrown && (
             <rect
-              x="2"
-              y="2"
-              width="96"
-              height="96"
-              rx="12"
+              x="4"
+              y="4"
+              width="92"
+              height="92"
+              rx="14"
               fill="none"
               stroke="#7C3AED"
-              strokeWidth="5"
-              strokeDasharray="8 4"
+              strokeWidth="6"
+              strokeDasharray="10 5"
             />
           )}
 
-          {/* Endodontic (PSA) Root Indicator */}
+          {/* Endodontic (PSA) Root Canal Indicator */}
           {isEndo && (
             <line
               x1="50"
-              y1="10"
+              y1="12"
               x2="50"
-              y2="90"
+              y2="88"
               stroke="#D97706"
-              strokeWidth="6"
+              strokeWidth="7"
               strokeLinecap="round"
             />
           )}
         </svg>
 
-        {/* Ink Absorption Ripple Effect */}
-        {ripplingSurface && (
+        {/* Ink Absorption Ripple Animation */}
+        {lastClickedSurface && (
           <span
-            className="absolute inset-0 rounded-full pointer-events-none animate-ping opacity-35"
-            style={{ backgroundColor: CONDITION_COLORS[activeTool] }}
+            className="absolute inset-0 rounded-2xl pointer-events-none animate-ping opacity-40"
+            style={{ backgroundColor: CONDITION_FILLS[activeTool] }}
           />
         )}
       </div>
 
-      {/* Surface Status Labels Dot Indicator */}
-      <div className="flex gap-0.5 mt-1.5 h-1.5 items-center justify-center">
+      {/* Surface Pathology Multi-Dot Indicator */}
+      <div className="flex gap-1 mt-1.5 h-2 items-center justify-center">
         {tooth.surfaces.O !== 'HEALTHY' && (
           <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: CONDITION_COLORS[tooth.surfaces.O] }}
+            className="w-1.5 h-1.5 rounded-full ring-1 ring-white"
+            style={{ backgroundColor: CONDITION_FILLS[tooth.surfaces.O] }}
           />
         )}
         {tooth.generalCondition && tooth.generalCondition !== 'HEALTHY' && (
           <span
             className="w-1.5 h-1.5 rounded-full ring-1 ring-white"
-            style={{ backgroundColor: CONDITION_COLORS[tooth.generalCondition] }}
+            style={{ backgroundColor: CONDITION_FILLS[tooth.generalCondition] }}
           />
         )}
       </div>

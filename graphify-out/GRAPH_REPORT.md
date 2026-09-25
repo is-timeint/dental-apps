@@ -1,13 +1,18 @@
 # Graph Report - Dental-Apps  (2026-09-25)
 
 ## Corpus Check
-- 61 files · ~27,096 words
+- 66 files · ~31,075 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 461 nodes · 572 edges · 48 communities (40 shown, 8 thin omitted)
+- 483 nodes · 647 edges · 49 communities (41 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `536c91ba`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - UI/UX, Motion Physics & Micro-Interaction Standards
@@ -49,35 +54,36 @@
 - next.config.ts
 - postcss.config.mjs
 - 20260925_init_dental_schema.sql
+- sliding-tabs.tsx
 
 ## God Nodes (most connected - your core abstractions)
-1. `5. Spesifikasi Kebutuhan Fungsional (FRD)` - 17 edges
-2. `compilerOptions` - 16 edges
-3. `triggerHapticFeedback()` - 15 edges
-4. `useDentalStore` - 11 edges
-5. `clinics` - 11 edges
-6. `Product Requirement Document (PRD)` - 11 edges
-7. `Dental-Apps — Project Development Guidelines & Security Standards` - 10 edges
-8. `1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)` - 10 edges
-9. `encounters` - 9 edges
-10. `UI/UX, Motion Physics & Micro-Interaction Standards` - 9 edges
+1. `triggerHapticFeedback()` - 25 edges
+2. `5. Spesifikasi Kebutuhan Fungsional (FRD)` - 17 edges
+3. `compilerOptions` - 16 edges
+4. `Button()` - 12 edges
+5. `Badge()` - 11 edges
+6. `useDentalStore` - 11 edges
+7. `clinics` - 11 edges
+8. `Product Requirement Document (PRD)` - 11 edges
+9. `Dental-Apps — Project Development Guidelines & Security Standards` - 10 edges
+10. `1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Drawer()` --references--> `react`  [EXTRACTED]
   src/components/ui/drawer.tsx → package.json
 - `useDrawer()` --references--> `react`  [EXTRACTED]
   src/components/ui/drawer.tsx → package.json
+- `ToolItem` --references--> `ToothCondition`  [EXTRACTED]
+  src/components/clinical/odontogram-grid.tsx → src/types/dental.ts
+- `OdontogramTooth()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
+  src/components/clinical/odontogram-tooth.tsx → src/lib/haptic.ts
 - `QueueCardProps` --references--> `QueueItem`  [EXTRACTED]
   src/components/clinical/queue-card.tsx → src/types/dental.ts
-- `Home()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
-  src/app/page.tsx → src/lib/haptic.ts
-- `Home()` --calls--> `useDentalStore`  [EXTRACTED]
-  src/app/page.tsx → src/store/useDentalStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (48 total, 8 thin omitted)
+## Communities (49 total, 8 thin omitted)
 
 ### Community 0 - "UI/UX, Motion Physics & Micro-Interaction Standards"
 Cohesion: 0.08
@@ -104,8 +110,8 @@ Cohesion: 0.10
 Nodes (19): 1.1 OWASP API Security Top 10 + Standar Klinis, 1.2 Multi-Tenancy & Clinical Data Isolation, 1.3 Keamanan Berkas Medis (Rontgen, Foto Intraoral, DICOM), 1.4 Perlindungan PHI / PII & Kebijakan Zero-Logging, 1.5 Next.js App Router & Server Actions Hardening, 1.6 Rate Limiting, Brute Force & Anti-Scraping, 1.7 Concurrency Control & Database Locking (Race Condition Prevention), 1.8 Immutable Medico-Legal Audit Trail (+11 more)
 
 ### Community 6 - "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)"
-Cohesion: 0.13
-Nodes (27): Home(), ChairStatusGrid(), OdontogramGrid(), TOOL_PALETTE, OdontogramTooth(), PeriodontalPreview(), QueueCard(), TopNav() (+19 more)
+Cohesion: 0.11
+Nodes (37): Home(), ChairStatusGrid(), CLINICAL_TOOLS, FDI_ANATOMICAL_LABELS, OdontogramGrid(), PeriodontalPreview(), QueueCard(), ClinicalSidebar() (+29 more)
 
 ### Community 7 - "5. Standar Modal, Dialog, dan Bottom Sheet"
 Cohesion: 0.07
@@ -124,8 +130,8 @@ Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 14 - "useDentalStore.ts"
-Cohesion: 0.17
-Nodes (20): CONDITION_COLORS, OdontogramToothProps, QueueCardProps, ADULT_FDI_TEETH, DentalStoreState, INITIAL_BRANCHES, INITIAL_CHAIRS, INITIAL_ODONTOGRAM (+12 more)
+Cohesion: 0.14
+Nodes (23): ToolItem, CONDITION_FILLS, FDI_ANATOMICAL_NAMES, OdontogramTooth(), OdontogramToothProps, QueueCardProps, ADULT_FDI_TEETH, DentalStoreState (+15 more)
 
 ### Community 15 - "drawer.tsx"
 Cohesion: 0.13
@@ -203,8 +209,12 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 Cohesion: 0.61
 Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, encounters, invoices, odontogram_surfaces (+3 more)
 
+### Community 48 - "sliding-tabs.tsx"
+Cohesion: 0.40
+Nodes (3): StandardSlidingTabsProps, TabItem, haptic
+
 ## Knowledge Gaps
-- **224 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+219 more)
+- **235 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+230 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -212,11 +222,11 @@ Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, enc
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `1. Executive Summary & Problem Statements`, `drawer.tsx`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `react` connect `drawer.tsx` to `dependencies`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _224 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _235 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI/UX, Motion Physics & Micro-Interaction Standards` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Product Requirement Document (PRD)` be split into smaller, more focused modules?**

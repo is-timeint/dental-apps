@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1790323778.3291273,
-    "ast_hash": "293a5302389ea4a7f666cf512e4ff029",
+    "mtime": 1790328404.4144175,
+    "ast_hash": "44808490e4e3c22dde65740aa0ced32b",
     "semantic_hash": ""
   },
   "src/components/clinical/chair-status-grid.tsx": {
@@ -85,13 +85,13 @@
     "semantic_hash": ""
   },
   "src/components/clinical/odontogram-grid.tsx": {
-    "mtime": 1790323713.0134585,
-    "ast_hash": "72b3d8e8727086b2e3338f46dcd36645",
+    "mtime": 1790328305.0033941,
+    "ast_hash": "e9453938fe2881f5342c9bfeba1468a6",
     "semantic_hash": ""
   },
   "src/components/clinical/odontogram-tooth.tsx": {
-    "mtime": 1790323693.64898,
-    "ast_hash": "79c004483af7f23cdbb8b0608b8ff212",
+    "mtime": 1790328282.4154243,
+    "ast_hash": "46e2fa070bbdad4d653e7aa249772507",
     "semantic_hash": ""
   },
   "src/components/clinical/periodontal-preview.tsx": {
@@ -105,8 +105,8 @@
     "semantic_hash": ""
   },
   "src/components/layout/top-nav.tsx": {
-    "mtime": 1790323849.9971921,
-    "ast_hash": "d083da8f03c880f57431f2457075c569",
+    "mtime": 1790328328.3340762,
+    "ast_hash": "f15853a5058e2556d723f78091d9f864",
     "semantic_hash": ""
   },
   "src/components/ui/avatar.tsx": {
@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/rolling-ticker.tsx": {
-    "mtime": 1790323564.6510887,
-    "ast_hash": "9aa6089d59a5c7d524d07a71066506c5",
+    "mtime": 1790328261.3983617,
+    "ast_hash": "e936de75ea6abfa4040aee9af98f1bb7",
     "semantic_hash": ""
   },
   "src/components/ui/separator.tsx": {
@@ -327,6 +327,31 @@
   "supabase/migrations/20260925_init_dental_schema.sql": {
     "mtime": 1790327283.966666,
     "ast_hash": "c3ad3e276e6dfb52940fc4363a1ec278",
+    "semantic_hash": ""
+  },
+  "src/components/layout/clinical-sidebar.tsx": {
+    "mtime": 1790328317.64868,
+    "ast_hash": "40c429302c675500e053b9c79329802c",
+    "semantic_hash": ""
+  },
+  "src/components/modules/bmhp-inventory-view.tsx": {
+    "mtime": 1790328355.5391283,
+    "ast_hash": "cf57bc804cf1562f5acf24077a73f7ec",
+    "semantic_hash": ""
+  },
+  "src/components/modules/bpjs-pcare-view.tsx": {
+    "mtime": 1790328384.4774606,
+    "ast_hash": "abb682164ffcc871d015af324b50cf51",
+    "semantic_hash": ""
+  },
+  "src/components/modules/dental-lab-view.tsx": {
+    "mtime": 1790328344.387048,
+    "ast_hash": "f23d2f7a5b1ce56216b32505acc4e616",
+    "semantic_hash": ""
+  },
+  "src/components/modules/satusehat-view.tsx": {
+    "mtime": 1790328367.732531,
+    "ast_hash": "c410871c59e892d2419c2400c6f4f054",
     "semantic_hash": ""
   }
 }

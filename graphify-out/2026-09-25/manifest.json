@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790323482.2587256,
-    "ast_hash": "e85ef47b10c6de432493c8251b7f1855",
+    "mtime": 1790327220.02974,
+    "ast_hash": "9187c76aff58268a7b5ce5228e7f6b2b",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -307,6 +307,26 @@
   "public/window.svg": {
     "mtime": 1790323399.04923,
     "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/admin.ts": {
+    "mtime": 1790327268.440846,
+    "ast_hash": "fc2722bd0877bdba441359ccd2cf3d80",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/client.ts": {
+    "mtime": 1790327256.313983,
+    "ast_hash": "0fcd46865aa959be0b36035511310e72",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase/server.ts": {
+    "mtime": 1790327262.247686,
+    "ast_hash": "03ec44f2831cebd761b54592522c4be4",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260925_init_dental_schema.sql": {
+    "mtime": 1790327283.966666,
+    "ast_hash": "c3ad3e276e6dfb52940fc4363a1ec278",
     "semantic_hash": ""
   }
 }

@@ -1,11 +1,11 @@
 # Graph Report - Dental-Apps  (2026-09-25)
 
 ## Corpus Check
-- 57 files · ~25,895 words
+- 61 files · ~27,096 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 439 nodes · 525 edges · 44 communities (36 shown, 8 thin omitted)
+- 461 nodes · 572 edges · 48 communities (40 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
@@ -48,35 +48,36 @@
 - eslint.config.mjs
 - next.config.ts
 - postcss.config.mjs
+- 20260925_init_dental_schema.sql
 
 ## God Nodes (most connected - your core abstractions)
 1. `5. Spesifikasi Kebutuhan Fungsional (FRD)` - 17 edges
 2. `compilerOptions` - 16 edges
 3. `triggerHapticFeedback()` - 15 edges
 4. `useDentalStore` - 11 edges
-5. `Product Requirement Document (PRD)` - 11 edges
-6. `Dental-Apps — Project Development Guidelines & Security Standards` - 10 edges
-7. `1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)` - 10 edges
-8. `UI/UX, Motion Physics & Micro-Interaction Standards` - 9 edges
-9. `Button()` - 8 edges
-10. `DentalStoreState` - 8 edges
+5. `clinics` - 11 edges
+6. `Product Requirement Document (PRD)` - 11 edges
+7. `Dental-Apps — Project Development Guidelines & Security Standards` - 10 edges
+8. `1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)` - 10 edges
+9. `encounters` - 9 edges
+10. `UI/UX, Motion Physics & Micro-Interaction Standards` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Drawer()` --references--> `react`  [EXTRACTED]
   src/components/ui/drawer.tsx → package.json
 - `useDrawer()` --references--> `react`  [EXTRACTED]
   src/components/ui/drawer.tsx → package.json
-- `OdontogramTooth()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
-  src/components/clinical/odontogram-tooth.tsx → src/lib/haptic.ts
 - `QueueCardProps` --references--> `QueueItem`  [EXTRACTED]
   src/components/clinical/queue-card.tsx → src/types/dental.ts
-- `DentalStoreState` --references--> `QueueItem`  [EXTRACTED]
-  src/store/useDentalStore.ts → src/types/dental.ts
+- `Home()` --calls--> `triggerHapticFeedback()`  [EXTRACTED]
+  src/app/page.tsx → src/lib/haptic.ts
+- `Home()` --calls--> `useDentalStore`  [EXTRACTED]
+  src/app/page.tsx → src/store/useDentalStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (44 total, 8 thin omitted)
+## Communities (48 total, 8 thin omitted)
 
 ### Community 0 - "UI/UX, Motion Physics & Micro-Interaction Standards"
 Cohesion: 0.08
@@ -104,7 +105,7 @@ Nodes (19): 1.1 OWASP API Security Top 10 + Standar Klinis, 1.2 Multi-Tenancy & 
 
 ### Community 6 - "1. Security-First Architecture & Medico-Legal Compliance (CRITICAL)"
 Cohesion: 0.13
-Nodes (28): Home(), ChairStatusGrid(), OdontogramGrid(), TOOL_PALETTE, PeriodontalPreview(), QueueCard(), QueueCardProps, TopNav() (+20 more)
+Nodes (27): Home(), ChairStatusGrid(), OdontogramGrid(), TOOL_PALETTE, OdontogramTooth(), PeriodontalPreview(), QueueCard(), TopNav() (+19 more)
 
 ### Community 7 - "5. Standar Modal, Dialog, dan Bottom Sheet"
 Cohesion: 0.07
@@ -115,8 +116,8 @@ Cohesion: 0.08
 Nodes (25): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+17 more)
 
 ### Community 12 - "dependencies"
-Cohesion: 0.08
-Nodes (25): @base-ui/react, class-variance-authority, cn, framer-motion, lucide-react, next, dependencies, @base-ui/react (+17 more)
+Cohesion: 0.07
+Nodes (29): @base-ui/react, class-variance-authority, cn, framer-motion, lucide-react, next, dependencies, @base-ui/react (+21 more)
 
 ### Community 13 - "components.json"
 Cohesion: 0.09
@@ -124,7 +125,7 @@ Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent 
 
 ### Community 14 - "useDentalStore.ts"
 Cohesion: 0.17
-Nodes (19): CONDITION_COLORS, OdontogramTooth(), OdontogramToothProps, ADULT_FDI_TEETH, DentalStoreState, INITIAL_BRANCHES, INITIAL_CHAIRS, INITIAL_ODONTOGRAM (+11 more)
+Nodes (20): CONDITION_COLORS, OdontogramToothProps, QueueCardProps, ADULT_FDI_TEETH, DentalStoreState, INITIAL_BRANCHES, INITIAL_CHAIRS, INITIAL_ODONTOGRAM (+12 more)
 
 ### Community 15 - "drawer.tsx"
 Cohesion: 0.13
@@ -198,8 +199,12 @@ Nodes (3): Indeks Dokumentasi Modular Dental-Apps (PMS/EDR), Matriks Modul & Rel
 Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
+### Community 44 - "20260925_init_dental_schema.sql"
+Cohesion: 0.61
+Nodes (11): audit_logs, branches, clinics, dental_chairs, dental_lab_orders, encounters, invoices, odontogram_surfaces (+3 more)
+
 ## Knowledge Gaps
-- **222 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+217 more)
+- **224 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+219 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -207,11 +212,11 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `1. Executive Summary & Problem Statements`, `drawer.tsx`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `react` connect `drawer.tsx` to `dependencies`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _222 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _224 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI/UX, Motion Physics & Micro-Interaction Standards` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Product Requirement Document (PRD)` be split into smaller, more focused modules?**

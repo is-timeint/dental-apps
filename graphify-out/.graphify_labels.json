@@ -46,5 +46,6 @@
   "44": "20260925_init_dental_schema.sql",
   "45": "admin.ts",
   "46": "client.ts",
-  "47": "server.ts"
+  "47": "server.ts",
+  "48": "sliding-tabs.tsx"
 }
