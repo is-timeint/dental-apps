@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ClinicalSidebar, ModuleId } from '@/components/layout/clinical-sidebar';
 import { TopNav } from '@/components/layout/top-nav';
 import { ChairStatusGrid } from '@/components/clinical/chair-status-grid';
@@ -282,52 +283,44 @@ export default function Home() {
                     </div>
 
                     {/* EMR Modality Switcher (PRD 3.1: SVG Odontogram, 2D DICOM, Three.js 3D) */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 p-2 bg-surface-subtle border border-border-subtle rounded-2xl">
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            triggerHapticFeedback('selection');
-                            setEmrSubMode('ODONTOGRAM');
-                          }}
-                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
-                            emrSubMode === 'ODONTOGRAM'
-                              ? 'bg-brand-primary text-white shadow-xs'
-                              : 'text-text-secondary hover:text-text-primary'
-                          }`}
-                        >
-                          Bagan Odontogram 2D (FDI)
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            triggerHapticFeedback('selection');
-                            setEmrSubMode('DICOM_XRAY');
-                          }}
-                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
-                            emrSubMode === 'DICOM_XRAY'
-                              ? 'bg-brand-primary text-white shadow-xs'
-                              : 'text-text-secondary hover:text-text-primary'
-                          }`}
-                        >
-                          Radiologi DICOM 2D (Cornerstone)
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            triggerHapticFeedback('selection');
-                            setEmrSubMode('INTRAORAL_3D');
-                          }}
-                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
-                            emrSubMode === 'INTRAORAL_3D'
-                              ? 'bg-brand-primary text-white shadow-xs'
-                              : 'text-text-secondary hover:text-text-primary'
-                          }`}
-                        >
-                          Pemindai 3D Intraoral (Three.js STL)
-                        </button>
+                    <div className="flex flex-wrap items-center justify-between gap-3 p-1.5 bg-surface-subtle border border-border-subtle rounded-2xl">
+                      <div className="flex items-center gap-1">
+                        {[
+                          { id: 'ODONTOGRAM' as const, label: 'Bagan Odontogram 2D (FDI)' },
+                          { id: 'DICOM_XRAY' as const, label: 'Radiologi DICOM 2D (Cornerstone)' },
+                          { id: 'INTRAORAL_3D' as const, label: 'Pemindai 3D Intraoral (Three.js STL)' },
+                        ].map((mod) => {
+                          const isActive = emrSubMode === mod.id;
+                          return (
+                            <button
+                              key={mod.id}
+                              type="button"
+                              onClick={() => {
+                                triggerHapticFeedback('selection');
+                                setEmrSubMode(mod.id);
+                              }}
+                              className={`relative px-4 py-2 text-xs font-bold transition-colors cursor-pointer select-none rounded-xl ${
+                                isActive
+                                  ? 'text-white'
+                                  : 'text-text-secondary hover:text-text-primary'
+                              }`}
+                            >
+                              <span className="relative z-10">{mod.label}</span>
+                              {isActive && (
+                                <motion.div
+                                  layoutId="emrModalityPill"
+                                  className="absolute inset-0 bg-brand-primary rounded-xl shadow-xs z-0"
+                                  transition={{
+                                    type: 'spring',
+                                    stiffness: 440,
+                                    damping: 30,
+                                    mass: 0.8,
+                                  }}
+                                />
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
 
                       <div className="text-[11px] text-text-muted px-2">

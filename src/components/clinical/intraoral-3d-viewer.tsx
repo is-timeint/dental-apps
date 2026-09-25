@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -1042,88 +1043,83 @@ export const Intraoral3DViewer: React.FC = () => {
         {/* Top-Left: Arch Selector & Clinical Inspection Modes */}
         <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
           {/* Rahang Mode Switcher */}
-          <div className="flex items-center gap-1 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs">
+          {/* Rahang Mode Switcher */}
+          <div className="flex items-center gap-1 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs select-none">
             <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider">Rahang:</span>
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setArchMode('BOTH');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-                archMode === 'BOTH' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Semua (Oklusi Penuh)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setArchMode('MAXILLA');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-                archMode === 'MAXILLA' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Rahang Atas (Maksila)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setArchMode('MANDIBLE');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-                archMode === 'MANDIBLE' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Rahang Bawah (Mandibula)
-            </button>
+            {[
+              { id: 'BOTH' as const, label: 'Semua (Oklusi Penuh)' },
+              { id: 'MAXILLA' as const, label: 'Rahang Atas (Maksila)' },
+              { id: 'MANDIBLE' as const, label: 'Rahang Bawah (Mandibula)' },
+            ].map((m) => {
+              const isActive = archMode === m.id;
+              return (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => {
+                    triggerHapticFeedback('selection');
+                    setArchMode(m.id);
+                  }}
+                  className={`relative px-3 py-1.5 rounded-xl font-bold transition-colors cursor-pointer ${
+                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  <span className="relative z-10">{m.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="archModePill"
+                      className="absolute inset-0 bg-brand-primary rounded-xl shadow-xs z-0"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 440,
+                        damping: 30,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Clinical Modes */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs">
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setViewMode('ENAMEL');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-                viewMode === 'ENAMEL' ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Email Natural
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setViewMode('MARGIN');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1 ${
-                viewMode === 'MARGIN' ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              Margin Prep 46
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setViewMode('HEATMAP');
-              }}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1 ${
-                viewMode === 'HEATMAP' ? 'bg-rose-600 text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              <Flame className="w-3.5 h-3.5" />
-              Kontak Oklusal (MIP)
-            </button>
+          <div className="flex flex-wrap items-center gap-1 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs select-none">
+            {[
+              { id: 'ENAMEL' as const, label: 'Email Natural', icon: null },
+              { id: 'MARGIN' as const, label: 'Margin Prep 46', icon: Sparkles },
+              { id: 'HEATMAP' as const, label: 'Kontak Oklusal (MIP)', icon: Flame },
+            ].map((item) => {
+              const isActive = viewMode === item.id;
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => {
+                    triggerHapticFeedback('selection');
+                    setViewMode(item.id);
+                  }}
+                  className={`relative px-3 py-1.5 rounded-xl font-bold transition-colors cursor-pointer flex items-center gap-1 ${
+                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  {Icon && <Icon className="relative z-10 w-3.5 h-3.5" />}
+                  <span className="relative z-10">{item.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="clinicalViewModePill"
+                      className="absolute inset-0 bg-teal-600 rounded-xl shadow-xs z-0"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 440,
+                        damping: 30,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
 
             <button
               type="button"
@@ -1131,7 +1127,7 @@ export const Intraoral3DViewer: React.FC = () => {
                 triggerHapticFeedback('light');
                 setWireframe(!wireframe);
               }}
-              className={`px-3 py-1.5 rounded-xl border transition-all flex items-center gap-1 ${
+              className={`px-3 py-1.5 rounded-xl border transition-all flex items-center gap-1 cursor-pointer ${
                 wireframe ? 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold' : 'border-slate-700 text-slate-300 hover:text-white'
               }`}
             >
@@ -1144,45 +1140,42 @@ export const Intraoral3DViewer: React.FC = () => {
         {/* Top-Right: Camera Presets & Dynamic TMJ Jaw Opening Slider */}
         <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-2">
           {/* Quick Camera Presets */}
-          <div className="flex items-center gap-1 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs">
+          <div className="flex items-center gap-1 p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs select-none">
             <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider">Sudut:</span>
-            <button
-              type="button"
-              onClick={() => handleApplyPreset('DEFAULT')}
-              className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
-                activePreset === 'DEFAULT' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Fasial (Depan)
-            </button>
-            <button
-              type="button"
-              onClick={() => handleApplyPreset('OCCLUSAL_MAND')}
-              className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
-                activePreset === 'OCCLUSAL_MAND' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Oklusal Bawah
-            </button>
-            <button
-              type="button"
-              onClick={() => handleApplyPreset('OCCLUSAL_MAX')}
-              className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
-                activePreset === 'OCCLUSAL_MAX' ? 'bg-brand-primary text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Oklusal Atas
-            </button>
-            <button
-              type="button"
-              onClick={() => handleApplyPreset('PREP')}
-              className={`px-2.5 py-1 rounded-lg font-bold transition-all flex items-center gap-1 ${
-                activePreset === 'PREP' ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              <ZoomIn className="w-3 h-3" />
-              Zoom Gigi 46-16
-            </button>
+            {[
+              { id: 'DEFAULT' as const, label: 'Fasial (Depan)', icon: null },
+              { id: 'OCCLUSAL_MAND' as const, label: 'Oklusal Bawah', icon: null },
+              { id: 'OCCLUSAL_MAX' as const, label: 'Oklusal Atas', icon: null },
+              { id: 'PREP' as const, label: 'Zoom Gigi 46-16', icon: ZoomIn },
+            ].map((preset) => {
+              const isActive = activePreset === preset.id;
+              const Icon = preset.icon;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => handleApplyPreset(preset.id)}
+                  className={`relative px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer flex items-center gap-1 ${
+                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  {Icon && <Icon className="relative z-10 w-3 h-3" />}
+                  <span className="relative z-10">{preset.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="cameraPresetPill"
+                      className="absolute inset-0 bg-brand-primary rounded-lg shadow-xs z-0"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 440,
+                        damping: 30,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Dynamic TMJ Jaw Articulation (Buka Mulut) Slider */}
@@ -1222,25 +1215,40 @@ export const Intraoral3DViewer: React.FC = () => {
         )}
 
         {/* Bottom-Right: VITA Classical Shade Guide */}
-        <div className="absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs">
+        <div className="absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white shadow-xl text-xs select-none">
           <span className="font-bold text-slate-300 pl-2">VITA Shade:</span>
-          {(['BLEACH', 'A1', 'A2', 'A3'] as const).map((shade) => (
-            <button
-              key={shade}
-              type="button"
-              onClick={() => {
-                triggerHapticFeedback('selection');
-                setDentalShade(shade);
-              }}
-              className={`px-2.5 py-1 rounded-lg font-mono font-bold transition-all ${
-                dentalShade === shade
-                  ? 'bg-brand-primary text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              {shade}
-            </button>
-          ))}
+          {(['BLEACH', 'A1', 'A2', 'A3'] as const).map((shade) => {
+            const isActive = dentalShade === shade;
+            return (
+              <button
+                key={shade}
+                type="button"
+                onClick={() => {
+                  triggerHapticFeedback('selection');
+                  setDentalShade(shade);
+                }}
+                className={`relative px-2.5 py-1 rounded-lg font-mono font-bold transition-colors cursor-pointer ${
+                  isActive
+                    ? 'text-white'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <span className="relative z-10">{shade}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="vitaShadePill"
+                    className="absolute inset-0 bg-brand-primary rounded-lg shadow-xs z-0"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 440,
+                      damping: 30,
+                      mass: 0.8,
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
 
         {/* Bottom-Left: Interactive Hint */}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Activity,
   Smile,
@@ -182,20 +183,20 @@ export const ClinicalSidebar: React.FC<ClinicalSidebarProps> = ({
                     type="button"
                     onClick={() => handleModuleClick(mod.id)}
                     title={collapsed ? `${mod.code}: ${mod.name}` : undefined}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all group ${
+                    className={`relative flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-colors group cursor-pointer select-none ${
                       isActive
-                        ? 'bg-brand-primary text-white shadow-xs'
+                        ? 'text-white'
                         : 'text-text-secondary hover:text-text-primary hover:bg-surface-subtle'
                     }`}
                   >
                     <Icon
-                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                      className={`relative z-10 w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
                         isActive ? 'text-white' : 'text-text-muted group-hover:text-brand-primary'
                       }`}
                     />
 
                     {!collapsed && (
-                      <div className="flex items-center justify-between w-full min-w-0">
+                      <div className="relative z-10 flex items-center justify-between w-full min-w-0">
                         <span className="truncate">{mod.name}</span>
                         {mod.badge !== undefined && (
                           <span
@@ -207,6 +208,19 @@ export const ClinicalSidebar: React.FC<ClinicalSidebarProps> = ({
                           </span>
                         )}
                       </div>
+                    )}
+
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSidebarIndicator"
+                        className="absolute inset-0 bg-brand-primary rounded-xl shadow-xs z-0"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 440,
+                          damping: 30,
+                          mass: 0.8,
+                        }}
+                      />
                     )}
                   </button>
                 );

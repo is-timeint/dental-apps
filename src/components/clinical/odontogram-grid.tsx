@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useDentalStore } from '@/store/useDentalStore';
 import { OdontogramTooth } from './odontogram-tooth';
 import { ToothCondition } from '@/types/dental';
@@ -114,35 +115,42 @@ export const OdontogramGrid: React.FC = () => {
             <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               Format Lengkung Gigi:
             </span>
-            <div className="flex bg-surface-subtle p-1 rounded-xl">
-              <button
-                type="button"
-                onClick={() => {
-                  triggerHapticFeedback('selection');
-                  setArchType('ADULT');
-                }}
-                className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all ${
-                  archType === 'ADULT'
-                    ? 'bg-brand-primary text-white shadow-xs'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
-              >
-                Permanen Dewasa (FDI 11–48)
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  triggerHapticFeedback('selection');
-                  setArchType('PEDIATRIC');
-                }}
-                className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all ${
-                  archType === 'PEDIATRIC'
-                    ? 'bg-brand-primary text-white shadow-xs'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
-              >
-                Gigi Sulung Anak (FDI 51–85)
-              </button>
+            <div className="flex bg-surface-subtle p-1 rounded-xl relative select-none">
+              {[
+                { id: 'ADULT' as const, label: 'Permanen Dewasa (FDI 11–48)' },
+                { id: 'PEDIATRIC' as const, label: 'Gigi Sulung Anak (FDI 51–85)' },
+              ].map((item) => {
+                const isActive = archType === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      triggerHapticFeedback('selection');
+                      setArchType(item.id);
+                    }}
+                    className={`relative px-3.5 py-1.5 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-text-secondary hover:text-text-primary'
+                    }`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="dentitionFormatPill"
+                        className="absolute inset-0 bg-brand-primary rounded-lg shadow-xs z-0"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 440,
+                          damping: 30,
+                          mass: 0.8,
+                        }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
